@@ -1,0 +1,32 @@
+--- 
+layout: post
+title: "since cucumber=0.3.4, he has difficult with merb  "
+typo_id: 18
+---
+  <p>Since  <a href="http://cukes.info/">Cucumber</a> 0.3.4, there are a big change. With this change, you need modify your using of Cucumber with Merb. In <a href="http://github.com/aslakhellesoy/cucumber/blob/master/History.txt">History.txt</a> of Cucumber, you can read :</p>
+
+  <typo:code>
+  ** IMPORTANT UPGRADE NOTES FOR RAILS USERS **
+   
+  Running Cucumber features in the same Ruby interpreter as Rake doesn't seem to work,
+  so you have to explicitly tell the task to fork (like it was doing by default in prior
+  versions). In lib/tasks/cucumber.rake:
+   
+    Cucumber::Rake::Task.new(:features) do |t| 
+      t.fork = true # Explicitly fork
+      t.cucumber_opts = %w{--format pretty}
+    end 
+   
+  (If you run script/generate cucumber this will be done for you).
+  Alternatively you can omit forking and run features like this:
+   
+    RAILS_ENV=test rake features
+   
+  However, setting the RAILS_ENV is easy to forget, so I don't recommend relying on this.
+  </typo:code>
+  <p>This note is true to Merb user too. By default, all Merb user use the <a href="http://github.com/roman/merb_cucumber/tree/master">Roman's merb_cucumber</a>. But the generator is not good now. The rake task <code>rake features</code> doesn't use the good cucumber options.</p>
+  <p>After a long and big fight with cucumber, I success to find all good options. Now with this options, I have same behaviour than before. If you want see an example in a Merb application, you can see <a href="http://github.com/shingara/oupsnow/commit/13ab272f31bbf49537e9addc8166661ced91c694">my commit on Oupsnow</a>. I fork too the Roman merb_cucumber and add <a href="http://github.com/shingara/merb_cucumber/commit/317d64d45204c01a6ccbadfe1bd95e5ad06f7012">a patch to can use cucumber 0.3.4 and more</a>.</p>
+  
+  <p>EDIT : My modif of merb_cucumber is integrate to Roman branch.</p>
+
+  <p><a href="http://blog.shingara.fr/cucumber-0-3-4-et-merb-la-dure-cohabitation.html">Traduction française</a></p>

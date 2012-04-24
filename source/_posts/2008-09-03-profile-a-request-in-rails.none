@@ -1,0 +1,43 @@
+--- 
+layout: post
+title: Profile a request in Rails
+typo_id: 4
+---
+  <p>To found the <a href="http://blog.shingara.fr/en/2008-08-01-gettext-with-rails-can-be-long-in-an-error-form.html">bug that speak before </a>, I would made a request profiling to know where a long time is spend during the rendering of this page</p>
+
+  <h1>How using the script Request Profiler</h1>
+
+  <p>Since Rails 2.0, there are a new script, <code>script/performance/request</code>. This script made a profile on one or several internet requests.</p>
+
+  <p>To define the request, you just need write a script like an integration test. This example come from rails's changelog.</p>
+
+  <typo:code lang="ruby">
+  get_with_redirect '/' 
+  say "GET / => #{path}"
+  post_with_redirect '/sessions', :username => 'john', :password => 'doe'
+  say "POST /sessions => #{path}"
+  </typo:code>
+
+  <p>Once script created, launch the script with number of request made in option</p>
+
+
+  <typo:code>$ ./script/performance/request -n 10 login_session.rb</typo:code>
+
+  <p>But there are no system (for me) to define session values in start. Before, you made the login connection by example, if you want a user connected</p>
+
+  <h1> Incompatibility between Rails 2.1 and ruby-prof</h1>
+  <p>So the Living on the Edge speak about add new script needeed ruby-prof-0.6.1, I thought it's the alone need ruby-prof-0.6.1. This version doesn't exist in rubyforge yet (last version is 0.6.0). But it's not true. Since rails 2.1, the script performance/request need too ruby-prof-0.6.1. But this version is not release yet. 
+  You need to make and to install this gem to add this functionnality. 
+  In fact, even if you update rails code, doesn't check the ruby-prof gem version, the version 0.6.0 haven't all methode needed.
+  </p>
+
+  <h1> Make and install ruby-prof-0.6.1</h1>
+
+  <p>You need get sources since ruby-prof svn</p>
+  <typo:code>svn co http://ruby-prof.rubyforge.org/svn/</typo:code>
+  <p>After, you generate the gem</p>
+  <typo:code>$ rake package</typo:code>
+  <p>In end, you can install the gem</p>
+  <typo:code># gem install pkg/ruby-prof-0.6.1.gem</typo:code>
+  <p>Now, you have ruby-prof-0.6.1 install in you system and you can use the script performance/request.</p>
+  <p><a href="http://blog.shingara.fr/2008/09/03/profiler-une-requete-rails">Traduction française</a></p>

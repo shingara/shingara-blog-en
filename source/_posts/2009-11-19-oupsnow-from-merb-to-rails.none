@@ -1,0 +1,25 @@
+--- 
+layout: post
+title: Oupsnow from Merb to Rails
+typo_id: 19
+---
+  <p>Lately, I decided to migrate <a href="http://oupsnow.rubyforge.org">Oupsnow</a>, from Merb to Rails.</p>
+
+  <p>Just after ending my migration from SQL to MongoDB, I starting a new one but this one much more deep.</p>
+
+  <p>Why this migration ?</p>
+
+  <p>Rails 3. Since December 2008, almost one year later, Merb is allways freeze. Someone say that community is reviving and it's true.
+  I am glad to see that, but Merb is really late now with one year of late. Even Rails don't really improve in his stable version,
+  his edge move a lot.</p>
+
+  <p>Trying test all new technologies in Ruby, I will play with Rails 3. But no migrating too exists to migrate from Merb to Rails 3.
+  After a quick test, I see that difference between Rails 2.3.x and Rails 3 is little. So the migration from Rails 2.3.x to Rails 3 can be
+  more easily.</p>
+
+  <p>Like I want release soon as possible a stable version of Oupsnow. I decided to migrate Oupsnow to Rails 2.3.x before upgrade to
+  Rails 3. And this time, I maybe can release a stable version of Oupsnow compatible with Rails 3.</p>
+  
+  <p>Oupsnow become a project Rails/MongoMapper and no more a Merb/DataMapper project like before. Any help are welcome.</p>
+
+  <p><a href="http://blog.shingara.fr/oupsnow-de-merb-i-rails.html">Traduction française</a></p>

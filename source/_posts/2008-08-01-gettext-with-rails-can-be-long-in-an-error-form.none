@@ -1,0 +1,11 @@
+--- 
+layout: post
+title: Gettext with rails can be long in an error form
+typo_id: 15
+---
+  <p>Today, I spend all the day try understand a problem in my application, develop in my new job. This bug is very simple. During the form validation, if it's not validate by rails, my controller render the same action with field in error. Normally, it's simple. But in my case, the page spend more 40 second to render. After read log, the problem is not in controller, but in my rendering page.</p>  
+  <p>To understand all, I create a profil to my request with the script <code>/script/performance/request</code> (after a fight against). Once the profil create, I analyse that my problem was a search of translate error message that process a lot of. After a long time to search, I found the problem.</p>    <p> In rails, during the tag creation with helper method, there are a call to <code>errors.on</code> to know where is the error and highlight this field. But where in rails there are just a call to hash, Gettext has alias method and search in each call the translation. In production, this call is light because all translation cached. But in developpment mode, there are no cache. So each time, Gettext load the mo file and iterate on all translation string to find the good translation. It's this iteration that spend a lot of time and explain the long time to wait the rendering.</p>
+  
+  <p>This behaviour is only in developpment environment, because there are test on this environment name. In all environment, all translation cached.</p>  
+  <p>To resolv this problem, you can change the default environement with another name like dev otherwise development. In this case, all translation cached. You can alsa write this code <code>GetText.cached = true</code> in your envionnement.rb. But with this configuration, when you update mo file, you need restart your serveur to obtains translate entries.</p> 
+  <p><a href="http://blog.shingara.fr/gettext-avec-Rails-ca-peux-etre-long-pour-un-formulaire-en-erreur.html">Traduction française</a></p>

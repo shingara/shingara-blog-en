@@ -1,0 +1,13 @@
+--- 
+layout: post
+title: "Pictrails 0.6.0 released "
+typo_id: 7
+---
+  <p>Since 1 month, a new release of <a href="http://pictrails.rubyforge.org">Pictrails</a> is out.</p>
+  <p>There are no big modification neither big new feature. Only two features added. They come after user's ask.</p>
+  <p>The first feature is possibility to copy picture in other gallery. Sometimes that can be useful.</p>
+  <p>The other feature is possibility to define picture in front of gallery. In previous release, you can't define the picture in front. Now you can define by random or by selecting the picture in front of gallery.</p>
+  <p>This version is lastest to support by Rails 2.1. Now the HEAD go to Rails 2.2 release soon.</p>
+  <p>You can <a href="http://rubyforge.org/frs/?group_id=5385&release_id=2838">download this new version</a> and install it.</p>
+
+  <p><a href="http://blog.shingara.fr/2008/11/18/sortie-de-pictrails-0-6-0">Traduction française</a></p>

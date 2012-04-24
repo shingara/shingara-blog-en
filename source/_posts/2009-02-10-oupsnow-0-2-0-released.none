@@ -1,0 +1,23 @@
+--- 
+layout: post
+title: Oupsnow 0.2.0 released
+typo_id: 12
+---
+ <p>After less of one month, There are a new version of <a href="http://oupsnow.rubyforge.org/">Oupsnow</a>. This new version 0.2.0 is the first, I use in production. Now, my <a href="http://dev.shingara.fr/">development platforme</a> is not manage by Redmine, it's Oupsnow.</p>
+
+  <p>The news in this version are :</p>
+
+  <ul>
+  <li>A converter Redmine -> Oupsnow integrate. It's with it, I can change my development platforme. without lost.</li>
+  </ul>
+
+  <p>to be added :</p>
+  <ul>
+  <li>A milestones management</li>
+  <li>A ticket's state management</li>
+  <li>A ticket's severity management</li>
+  <li>A formating with RedCloth</li>
+  </ul>
+  <p>After this release, I focus me on Typo and made <a href="http://typo.lighthouseapp.com/projects/11171/tickets/14-drop-acts_as_ressource-and-add-a-more-flexible-url-system">the big feature</a> in <a href="http://typo.lighthouseapp.com/projects/11171/milestones/29390-typo-53">5.2.1 version</a>.</p>
+
+  <p><a href="http://blog.shingara.fr/sortie-de-oupsnow-0-2-0-avec-mise-en-production.html">Traduction française</a></p>      

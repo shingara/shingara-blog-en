@@ -1,0 +1,12 @@
+--- 
+layout: post
+title: Pictrails 0.5.0 released
+typo_id: 6
+---
+  <p>Just before my birthday in 11 October, I release a new version of <a href="http://pictrails.rubyforge.org">Pictrails</a>.</p>
+
+  <p>To this new version, the big ehancement is to add comment. Now all picture can be commented. In administration, there are possibility to manage this comment to delete and edit. It's little simple now, but this just beginning. If you want format your comment, you can with redcloth format.</p>
+  <p>About ergonomy, I add the view of previous and next picture in same gallery. This feature wasn't in Pictrails. This mistake fixed.</p>
+  <p>The picture sort by created in gallery.</p>
+  <p>All feedback is good and some design. A <a href="http://pictrails.shingara.fr/">demo</a> is always online with login by admin/pictrails in /admin url.</p>
+  <p><a href="http://blog.shingara.fr/2008/10/04/sortie-de-pictrails-0-5-0">Traduction française</a></p>

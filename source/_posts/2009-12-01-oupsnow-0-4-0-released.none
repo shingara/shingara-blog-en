@@ -1,0 +1,26 @@
+--- 
+layout: post
+title: " Oupsnow 0.4.0 released"
+typo_id: 20
+---
+  <p>That's it. I finally released Oupsnow 0.4.0. This version is a complete refactoring. After a oupsnow version 0.3.0 in Merb/DataMapper, this new 
+  version is with Rails and MongoDB. The server and the backend have changed.</p>
+
+  <p>But with the complete changed, there are some new features.</p>
+
+  <ul>
+  <li>Add filter by state in search ticket</li>
+  <li>Add possibility to change function of all member by project</li>
+  <li>Add preview in ticket and ticket updates</li>
+  <li>Add ticket's milestone information in ticket show</li>
+  <li>Add ordering to all column in ticket search</li>
+  </ul>
+
+  <p>You can download it on <a href="http://rubyforge.org/frs/?group_id=7685">rubyforge</a></p>
+  <p>If you want try the <a href="http://oupsnow.shingara.fr">oupsnow demo version</a>, it's online. The administrator login/password is : admin@admin.org/oupsnow Have fun.</p>
+
+  <p>The code source is hosted on github <a href="http://github.com/shingara/oupsnow">http://github.com/shingara/oupsnow</a></p>
+  <p>You can report any bug about it on my  <a href="http://dev.shingara.fr/projects/5/overview">own oupsnow instance</a></p>
+
+
+  <p><a href="http://blog.shingara.fr/sortie-de-oupsnow-0-4-0.html">Traduction française</a></p>   

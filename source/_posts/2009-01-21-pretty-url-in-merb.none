@@ -1,0 +1,9 @@
+--- 
+layout: post
+title: "Pretty URL in Merb "
+typo_id: 9
+---
+  <p>If like me, you are fan to pretty URL. You know how use it in RubyOnRails. You need define the return of method <code>to_params</code>. Using Merb, I want using same system in Merb. In first, I test modify the return of <code>to_params</code> method. But it's not the way in Merb. The way is simpliest. You need using option <code>:identify</code> in you resource in your route. With this system I can define the methode <code>ticket_permalink</code> in Oupsnow as defin the pretty URL of ticket. After I just need define what I want in this URL. This return string to be allways use in my URL generated to define a ticket. Finally, I need define a method <code>def self.get_by_permalink(ticket_permalink)</code> that I use in place of <code>Ticket.get(id)</code>. I can update easily the URL to define my ticket.</p>
+
+  <p>But you need to know that all parameter define your ticket are allways the value of <code>:identity</code> option. Even in nested resource. No <code>id</code> and <code>ticket_id</code>. Only <code>ticket_permalink</code>.</p>
+  <p><a href="http://blog.shingara.fr/les-merb-pretty-url">Traduction Française</a></p>

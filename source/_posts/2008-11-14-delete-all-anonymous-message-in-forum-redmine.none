@@ -1,0 +1,27 @@
+--- 
+layout: post
+title: " Delete all anonymous message in forum redmine"
+typo_id: 14
+---
+  <p>If you had open your redmine forum to anonymous, to avoid logged user to post in your forum, You can be attack by spam, because redmine haven't anti-spam. You can be in same position of me :</p>
+  <p> 
+    <img src="http://blog.shingara.fr/files/snapshoot_spam_forum_redmine.png" alt="screenshot de mon forum redmine spammé" />
+  </p>
+
+  <p>Once you have block anonymous message, you need delete all spam message. So you can delete each message one by one. Or use the rails console to delete all. Warning. if you have some real user to post in anonymous. My command delete this message too.</p>
+
+  <typo:code>
+  rails@shinydedi /var/rails/redmine/current $ ./script/console production    
+  Loading production environment (Rails 2.0.2)  >> User.anonymous
+  => #<AnonymousUser id: 4, login: "", hashed_password: "", firstname: "", lastname: "Anonymous", mail: "", mail_notification: false, admin: false, status: 0, last_login_on: nil, language: "", auth_source_id: nil, created_on: "2008-01-26 16:39:30", updated_on: "2008-01-26 16:39:30", type: "AnonymousUser">
+  >> User.anonymous.id
+  => 4
+  >> Message.find_all_by_author_id(User.anonymous.id).size
+  => 1693
+  >> Message.find_all_by_author_id(User.anonymous.id).each { |me| me.destroy }
+  => [.........]
+  >>  
+  </typo:code>
+
+  <p><a href="http://blog.shingara.fr/supprimer-tous-les-messages-danonyme-du-forum-redmine.html">Traduction Francaise</a></p>
+~                                                                                                                                        

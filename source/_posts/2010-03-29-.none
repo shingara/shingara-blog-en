@@ -1,0 +1,18 @@
+--- 
+layout: post
+title: about
+typo_id: 3
+---
+<h1>Who Am I?</h1>
+
+<p>This is the Cyril Mougel's blog. I spoke about my developments experiences. That can be some bugs, or new stuff.</p>
+
+<h1>What about I speak ?</h1>
+
+<p>The blog's main line is mainly the framework <a href="http://rubyonrails.org">Ruby on Rails</a>, but also all around the <a href="http://ruby-lang.org">Ruby lang</a>.</p>
+
+<p>Voici le blog de Cyril Mougel. Ici, j'y parle de mes expériences de développement. Que ca soit des bugs, rencontrés des nouveautés ou des améliorations apportés.</p>
+
+<h1>My experience</h1>
+
+<p>After 1 year in CapGemini where I code on J2EE, I am now a Ruby on Rails developer since 2008 in several companies.</p>

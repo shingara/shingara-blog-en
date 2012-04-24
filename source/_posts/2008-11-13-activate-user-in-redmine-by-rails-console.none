@@ -1,0 +1,30 @@
+--- 
+layout: post
+title: Activate user in redmine by rails console
+typo_id: 13
+---
+ <p>If during a moment, you send mail are block and you have redmine. All new users can't receive their activation. Redmine can't activate by admin interface. You need use Rails console to activate this users.</p>
+  <p>In this example, we activate the user with login 'ook'</p>
+  <p>First, connect in rails console in production mode.</p>
+
+  <typo:code>
+  $ ./script/console production
+  </typo:code>
+
+  <p>When you are in console, search the user, change his state and delete the activation token.</p>
+  <typo:code>
+  rails@shinydedi /var/rails/redmine/current $ ./script/console production
+  Loading production environment (Rails 2.0.2)  >> u = User.find_by_login 'ook'
+  => #<User id: 7, login: "ook", hashed_password: "8a45629b374f3e667ea72494246b17a11309ffff", firstname: "Thomas", lastname: "XXX", mail: "thomas@xxx.com", mail_notification: false, admin: false, status: 2, last_login_on: nil, language: "fr", auth_source_id: nil, created_on: "2008-10-27 18:50:54", updated_on: "2008-10-27 18:50:54", type: nil>
+  >> u.status = User::STATUS_ACTIVE
+  => 1
+  >> u.save
+  => true
+  >> t = Token.find_by_action_and_user_id('register', u.id)
+  => #<Token id: 16, user_id: 7, action: "register", value: "brVmdX8Sf0IecApDEWs0BmiD6ZN3DgsDoshpBZ2e", created_on: "2008-10-27 18:50:54">
+  >> t.destroy
+  => #<Token id: 16, user_id: 7, action: "register", value: "brVmdX8Sf0IecApDEWs0BmiD6ZN3DgsDoshpBZ2e", created_on: "2008-10-27 18:50:54">
+  </typo:code>
+
+  <p>It's works. Now your user ook can be logged in redmine without his activation mail.</p>
+  <p><a href="http://blog.shingara.fr/activer-un-compte-redmine-par-la-console-rails.html">Traduction Francaise</a></p>

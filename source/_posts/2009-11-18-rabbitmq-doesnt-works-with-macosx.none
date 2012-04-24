@@ -1,0 +1,18 @@
+--- 
+layout: post
+title: RabbitMQ doesn't works with MacOSX ?
+typo_id: 17
+---
+  <p>A couple of week, I want go on using <a href="http://www.rabbitmq.com/">RabbitMQ</a>, I have a big issue.
+  With RabbitMQ, you need configure vhost and user. but I can't connect to rabbitMQ by command <code>rabbitmqctl</code>.
+  Plan to upgrade my Mac to SnowLeopard I don't found how fix this problem. RabbitMQ can be wait.</p>
+
+  <p>But after my upgrade, I install again RabbitMQ. to use again. But I was allways same issue. After a long search, I
+  found the cause. The hostname.</p>
+
+  <p>What made if your control node rabbitMQ can't contact the master node ?</p>
+
+  <p>The solution is really simple. <code>hostname -s</code>. Add this one in your file <code>/etc/hosts</code> to ip 127.0.0.1. 
+  And now it's works. Sometimes the solution is so easy.</p>
+
+  <p><a href="http://blog.shingara.fr/rabbitmq-ne-marche-pas-avec-mac-os.html">Traduction française</a></p>

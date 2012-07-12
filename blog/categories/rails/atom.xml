@@ -4,7 +4,7 @@
   <title><![CDATA[Category: rails | Shiny happy people coding]]></title>
   <link href="http://blog-en.shingara.fr//blog/categories/rails/atom.xml" rel="self"/>
   <link href="http://blog-en.shingara.fr//"/>
-  <updated>2012-07-12T09:34:41+02:00</updated>
+  <updated>2012-07-12T09:35:23+02:00</updated>
   <id>http://blog-en.shingara.fr//</id>
   <author>
     <name><![CDATA[Cyril Mougel]]></name>
@@ -12,90 +12,6 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
-  
-  <entry>
-    <title type="html"><![CDATA[Why I stop using decent_exposure]]></title>
-    <link href="http://blog-en.shingara.fr//why-i-stop-using-decent-exposure.html"/>
-    <updated>2012-07-11T09:49:00+02:00</updated>
-    <id>http://blog-en.shingara.fr//why-i-stop-using-decent-exposure</id>
-    <content type="html"><![CDATA[<p>After the release of <a href="https://github.com/voxdolo/decent_exposure">decent_exposure</a>, I was really happy.
-I use before <a href="https://github.com/josevalim/inherited_resources/">inherited_ressources</a>, but
-I started to discover some issue. If you want customize your controller,
-it can be hard and not really readable and maintanable. Inherited
-ressources is really great if you not want customize it. And you can't
-test your controller directly with inherited ressources like explain on
-the readme.</p>
-
-<p>The big advantage of <code>decent_exposure</code> to me is the capability to access
-variable directly in your views. No more need call instance variables.
-You just need call the method directly. You have a eager loading of your
-object because you not need instanciate in your controller if you don't
-need into it. It's just instanciate when you want it. A memoization
-system help you to avoid multiple DB call. This technique help the reuse
-of some view or partial, because you don't need instanciate an instance
-in your action. if you expose it you can call it easily. If this method
-expose is not use, nothing happen. In your partial you can override some
-variables expose by <code>:locals</code> params. I see a lot of interest in using
-<code>decent_exposure</code></p>
-
-<p>But after a usage of it. All this interest are add by using the
-<code>helper_method</code> class method in your controller. So if you create a
-method with eager loading inside and expose it with <code>helper_method</code> you
-have you own decent exposure with builtin method and decent exposure
-become useless.</p>
-
-<p><code>decent_exposure</code> was to me a discover of usage and capability of
-<code>helper_method</code>. But after using it on several real project, I think all
-hiding code by decent exposure can be disturbing. By example, decent
-exposure do an <code>update_attributes</code> on your object if a params of this
-object is discover. So in some case I do this <code>update_attributes</code> twice.
-One in expose method and one in my action. There are no big deal but in
-some case it introduce some bug and it's hard to understand what happen
-easily and you lost several hours to fix this bug.</p>
-
-<p>Another limitation to me is the override of this expose. To avoid
-multiple if inside, you can want assign your eager loading before
-calling this expose method.</p>
-
-<p>Une des limitations de <code>decent_exposure</code> selon moi est l'override de
-cette méthode. Parfois pour éviter les <code>if</code> infini dans cette méthode il
-est plus judicieux de définir directement la valeur de retour de cette
-méthode dans sa méthode d'action. Cela permet de savoir exactement ce
-que retourne cette méthode, mais aussi d'éviter les conflits dans
-d'autre action.</p>
-
-<p>Pour réalisé cela ma méthode stocke en mémoisation la variable
-d'instance égale au nom de la méthode. Ainsi ma méthode ressemble à ceci
-:</p>
-
-<p><code>ruby
-def post
-  @post ||= Post.find(params[:id])
-end
-helper_method :post
-</code></p>
-
-<p>Si je souhaite donc avoir un nouveau Post retourné par cette méthode
-j'ai juste à faire :</p>
-
-<p><code>ruby
-def new
-  @post = Post.new
-end
-</code></p>
-
-<p>Je surcharge le retour de la méthode post par la valeur <code>Post.new</code>. Pour
-faire cela avec <code>decent_exposure</code> il faut surchargé la variable
-<code>@_resource[:post]</code>. Mais rien ne m'assure que ce nom de variable d'instance
-soit conservé dans les futurs version de <code>decent_exposure</code>. Une solution serait peut-être de créer une
-méthode <code>post=()</code> lors de l'exposition d'un <code>post</code>, mais cela devient
-peut-être moins pratique.</p>
-
-<p>Voilà donc les raisons de mon arrêt d'utilisation de <code>decent_exposure</code>.
-Je peux très facilement émuler le comportement de <code>decent_exposure</code> et
-tout ça sans aucune dépendance externe.</p>
-]]></content>
-  </entry>
   
   <entry>
     <title type="html"><![CDATA[Quiet assets help you to have little log]]></title>

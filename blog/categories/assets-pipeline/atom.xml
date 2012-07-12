@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: assets_pipeline | Shiny happy people coding]]></title>
+  <link href="http://blog-en.shingara.fr//blog/categories/assets-pipeline/atom.xml" rel="self"/>
+  <link href="http://blog-en.shingara.fr//"/>
+  <updated>2012-07-12T09:34:41+02:00</updated>
+  <id>http://blog-en.shingara.fr//</id>
+  <author>
+    <name><![CDATA[Cyril Mougel]]></name>
+    <email><![CDATA[cyril.mougel@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Quiet assets help you to have little log]]></title>
+    <link href="http://blog-en.shingara.fr//quiet-assets-help-you-to-have-little-log.html"/>
+    <updated>2012-04-26T09:39:00+02:00</updated>
+    <id>http://blog-en.shingara.fr//quiet-assets-help-you-to-have-little-log</id>
+    <content type="html"><![CDATA[<p>One week ago, I discover a new gem really helpfull, <a href="https://github.com/evrone/quiet_assets">quiet_assets</a>.</p>
+
+<p>This gem is not a big deal, but it help a lot when you develop a Rails
+application ( > 3.1 ) with 'assets_pipeline'. If you have a lot of
+assets you have already see in your log a lot of information about
+requests doing on this assets. You can see log like :</p>
+
+<p><code>
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-02-13 13:24:04 +0400
+Served asset /application.js - 304 Not Modified (8ms)
+</code></p>
+
+<p>After, when you want see the log really interresting about the request
+you do, you need up on your log. It's really annoying. Our log file is
+really bloat by this logs.</p>
+
+<p>But <a href="https://github.com/evrone/quiet_assets">quiet_assets</a> is here to
+help you in this mess. After adding this gem in your Gemfile.</p>
+
+<p><code>
+gem 'quiet_assets', :group =&gt; :development
+</code></p>
+
+<p>You can discover your log clean and light like before assets_pipeline. No more logs about your assets
+request. Just your log you really need.</p>
+
+<p>Some gem can really be usefull even if it's little.</p>
+
+<p>Since rails 3.2.0, there are an option to define the logger of
+Sprockets. All informations is on this <a href="https://github.com/rails/rails/issues/2639">issue 2639</a>.
+But quiet_assets is allways usefull. When you define your sprocket's log to
+false you have allways logs from actionpack. You have less log, but
+allways too much.</p>
+
+<p><a href="http://blog.shingara.fr/quiet-assets-le-limiteur-de-log.html">French Translation</a></p>
+]]></content>
+  </entry>
+  
+</feed>

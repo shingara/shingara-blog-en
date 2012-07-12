@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: mongodb | Shiny happy people coding]]></title>
+  <link href="http://blog-en.shingara.fr//blog/categories/mongodb/atom.xml" rel="self"/>
+  <link href="http://blog-en.shingara.fr//"/>
+  <updated>2012-07-12T09:34:41+02:00</updated>
+  <id>http://blog-en.shingara.fr//</id>
+  <author>
+    <name><![CDATA[Cyril Mougel]]></name>
+    <email><![CDATA[cyril.mougel@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Moped the new mongoDB ruby driver]]></title>
+    <link href="http://blog-en.shingara.fr//moped-the-new-mongodb-ruby-driver.html"/>
+    <updated>2012-05-07T09:38:00+02:00</updated>
+    <id>http://blog-en.shingara.fr//moped-the-new-mongodb-ruby-driver</id>
+    <content type="html"><![CDATA[<p>In December 2011, <a href="https://github.com/bernerdschaefer">Bernerd Schaefer</a> created a new MongoDB ruby driver.
+This new driver is not supported by 10Gen (MongoDB creator) directly.
+The official MongoDB ruby driver is the gem <a href="https://github.com/mongodb/mongo-ruby-driver">mongo-ruby-driver</a>.</p>
+
+<h1>Goal of this gem</h1>
+
+<p>This gem will be created after some frustration from the Mongoid Core
+developer
+The team proposed to change the internal software design on MongoDB Ruby driver but all changes were refused.</p>
+
+<h2>Thread-safe</h2>
+
+<p>One of this gem's goals was to have a more thread-safe gem than the official MongoDB ruby driver.
+This official gem is sometimes considered like not 100% thread-safe like reported <a href="https://github.com/mperham/sidekiq/wiki/Problems-and-Troubleshooting">Mike Perham</a>.
+Since the ruby community discovered again the thread, it hasn't stopped of being a real problem.
+With Moped we can use <a href="http://mperham.github.com/sidekiq/">sidekiq</a>.</p>
+
+<h2>No more extension</h2>
+
+<p>If you want to use the MongoDB official driver, you will need to install another
+gem <a href="http://rubygems.org/gems/bson_ext">bson_ext</a>.
+Without it, you will have some performance penalties.
+As this gem is a C extension, this gem has 2 versions in order to be compatible with JRuby.
+One in C and the other in Java. It's therefore harder to maintain.</p>
+
+<p>With Moped, no more extension needed.
+Everything is done in pure ruby.
+A benchmark shows that this moped's bson version is even faster than the C extension.</p>
+
+<p>The only case where moped is slower than bson_ext is the ObjectId generation, like reported on <a href="https://groups.google.com/d/topic/mongoid/87IdIKO8-VM/discussion">Mongoid mailing-list</a>.
+But, after all, Moped is new.
+It can be improved in the future.</p>
+
+<h2>Cleanest API</h2>
+
+<p>The Moped API is really clean and simple.
+It depends on the developers using it.
+But, to me, it's a good API because it's really more "ruby way".</p>
+
+<h2>Better Replicat Set management</h2>
+
+<p>One of big feature of MongoDB is the ReplicatSet.
+With Moped, the ReplicatSet management is even better.
+There are no exception raise when a node is down.
+The switch off of node is immediately done by Moped.</p>
+
+<p>No need to list all of your node.
+Moped does it automaticly with the MongoDB mechanism.
+You can even add new nodes in your Replicat without restarting your application.</p>
+
+<h1>Limitation</h1>
+
+<p>Moped has some limitation in front of Mongo-ruby-driver.</p>
+
+<h2>Ruby 1.9 only</h2>
+
+<p>Moped works only with Ruby > 1.9. in order to avoid troubles with the 1.8 compatibilities.
+For instance, the Socket on Ruby 1.8 series is not the best.</p>
+
+<h2>No GridFS support</h2>
+
+<p>GridFS is not supported on Moped.
+This choice has been made to limit the size of the Moped code core.
+In the future, this feature may be added in a Moped extension.</p>
+
+<h1>Mongoid 3 integration</h1>
+
+<p>Mongoid 3 now uses only MongoDB ruby driver.
+Moped is a new dependency of Mongoid and mongo-ruby-driver is not anymore a dependencie.
+If you want to try this new driver you can test it on Mongoid 3.</p>
+
+<p>Warning: Mongoid 3 is still not released.
+If you want to test it, you will need to use the Master branch on Mongoid.</p>
+
+<p><code>ruby
+gem 'mongoid', :git =&gt; 'git://github.com/mongoid/mongoid'
+</code></p>
+
+<p><a href="http://blog.shingara.fr/moped-le-nouveau-driver-mongodb-pour-ruby.html">French Translation</a></p>
+]]></content>
+  </entry>
+  
+</feed>

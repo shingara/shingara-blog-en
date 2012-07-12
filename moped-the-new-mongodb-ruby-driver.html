@@ -1,0 +1,389 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Moped the new mongoDB ruby driver - Shiny happy people coding</title>
+  <meta name="author" content="Cyril Mougel">
+
+  
+  <meta name="description" content="In December 2011, Bernerd Schaefer created a new MongoDB ruby driver.
+This new driver is not supported by 10Gen (MongoDB creator) directly.
+The &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://blog-en.shingara.fr//moped-the-new-mongodb-ruby-driver.html">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Shiny happy people coding" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-15589471-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Shiny happy people coding</a></h1>
+  
+    <h2>Coding with smile</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:blog-en.shingara.fr/" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Moped the New mongoDB Ruby Driver</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-07T09:38:00+02:00" pubdate data-updated="true">May 7<span>th</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>In December 2011, <a href="https://github.com/bernerdschaefer">Bernerd Schaefer</a> created a new MongoDB ruby driver.
+This new driver is not supported by 10Gen (MongoDB creator) directly.
+The official MongoDB ruby driver is the gem <a href="https://github.com/mongodb/mongo-ruby-driver">mongo-ruby-driver</a>.</p>
+
+<h1>Goal of this gem</h1>
+
+<p>This gem will be created after some frustration from the Mongoid Core
+developer
+The team proposed to change the internal software design on MongoDB Ruby driver but all changes were refused.</p>
+
+<h2>Thread-safe</h2>
+
+<p>One of this gem&#8217;s goals was to have a more thread-safe gem than the official MongoDB ruby driver.
+This official gem is sometimes considered like not 100% thread-safe like reported <a href="https://github.com/mperham/sidekiq/wiki/Problems-and-Troubleshooting">Mike Perham</a>.
+Since the ruby community discovered again the thread, it hasn&#8217;t stopped of being a real problem.
+With Moped we can use <a href="http://mperham.github.com/sidekiq/">sidekiq</a>.</p>
+
+<h2>No more extension</h2>
+
+<p>If you want to use the MongoDB official driver, you will need to install another
+gem <a href="http://rubygems.org/gems/bson_ext">bson_ext</a>.
+Without it, you will have some performance penalties.
+As this gem is a C extension, this gem has 2 versions in order to be compatible with JRuby.
+One in C and the other in Java. It&#8217;s therefore harder to maintain.</p>
+
+<p>With Moped, no more extension needed.
+Everything is done in pure ruby.
+A benchmark shows that this moped&#8217;s bson version is even faster than the C extension.</p>
+
+<p>The only case where moped is slower than bson_ext is the ObjectId generation, like reported on <a href="https://groups.google.com/d/topic/mongoid/87IdIKO8-VM/discussion">Mongoid mailing-list</a>.
+But, after all, Moped is new.
+It can be improved in the future.</p>
+
+<h2>Cleanest API</h2>
+
+<p>The Moped API is really clean and simple.
+It depends on the developers using it.
+But, to me, it&#8217;s a good API because it&#8217;s really more &#8220;ruby way&#8221;.</p>
+
+<h2>Better Replicat Set management</h2>
+
+<p>One of big feature of MongoDB is the ReplicatSet.
+With Moped, the ReplicatSet management is even better.
+There are no exception raise when a node is down.
+The switch off of node is immediately done by Moped.</p>
+
+<p>No need to list all of your node.
+Moped does it automaticly with the MongoDB mechanism.
+You can even add new nodes in your Replicat without restarting your application.</p>
+
+<h1>Limitation</h1>
+
+<p>Moped has some limitation in front of Mongo-ruby-driver.</p>
+
+<h2>Ruby 1.9 only</h2>
+
+<p>Moped works only with Ruby > 1.9. in order to avoid troubles with the 1.8 compatibilities.
+For instance, the Socket on Ruby 1.8 series is not the best.</p>
+
+<h2>No GridFS support</h2>
+
+<p>GridFS is not supported on Moped.
+This choice has been made to limit the size of the Moped code core.
+In the future, this feature may be added in a Moped extension.</p>
+
+<h1>Mongoid 3 integration</h1>
+
+<p>Mongoid 3 now uses only MongoDB ruby driver.
+Moped is a new dependency of Mongoid and mongo-ruby-driver is not anymore a dependencie.
+If you want to try this new driver you can test it on Mongoid 3.</p>
+
+<p>Warning: Mongoid 3 is still not released.
+If you want to test it, you will need to use the Master branch on Mongoid.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">gem</span> <span class="s1">&#39;mongoid&#39;</span><span class="p">,</span> <span class="ss">:git</span> <span class="o">=&gt;</span> <span class="s1">&#39;git://github.com/mongoid/mongoid&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><a href="http://blog.shingara.fr/moped-le-nouveau-driver-mongodb-pour-ruby.html">French Translation</a></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Cyril Mougel</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-05-07T09:38:00+02:00" pubdate data-updated="true">May 7<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/mongodb/'>mongodb</a>, <a class='category' href='/blog/categories/mongoid/'>mongoid</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog-en.shingara.fr//moped-the-new-mongodb-ruby-driver.html" data-via="shingara" data-counturl="http://blog-en.shingara.fr//moped-the-new-mongodb-ruby-driver.html" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/quiet-assets-help-you-to-have-little-log.html" title="Previous Post: Quiet assets help you to have little log">&laquo; Quiet assets help you to have little log</a>
+      
+      
+        <a class="basic-alignment right" href="/dante-lets-you-put-some-daemon-in-your-code.html" title="Next Post: Dante lets you put some daemon in your code">Dante lets you put some daemon in your code &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/why-i-stop-using-decent-exposure.html">Why I stop using decent_exposure</a>
+      </li>
+    
+      <li class="post">
+        <a href="/test-your-rabl-view.html">Test your Rabl's view</a>
+      </li>
+    
+      <li class="post">
+        <a href="/vundle-the-bundler-of-vim.html">vundle the bundler of vim</a>
+      </li>
+    
+      <li class="post">
+        <a href="/dante-lets-you-put-some-daemon-in-your-code.html">Dante lets you put some daemon in your code</a>
+      </li>
+    
+      <li class="post">
+        <a href="/moped-the-new-mongodb-ruby-driver.html">Moped the new mongoDB ruby driver</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/shingara">@shingara</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'shingara',
+            count: 10,
+            skip_forks: false,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("shingara", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/shingara" class="twitter-follow-button" data-show-count="true">Follow @shingara</a>
+  
+</section>
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Cyril Mougel -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'blog-en-shingara';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog-en.shingara.fr//moped-the-new-mongodb-ruby-driver.html';
+        var disqus_url = 'http://blog-en.shingara.fr//moped-the-new-mongodb-ruby-driver.html';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

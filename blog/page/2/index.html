@@ -1,0 +1,993 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Shiny happy people coding</title>
+  <meta name="author" content="Cyril Mougel">
+
+  
+  <meta name="description" content="That&#8217;s it. A new version of Typo is released. I don&#8217;t really participate to this version, by lack of time and motivation, but I am &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://blog-en.shingara.fr//blog/page/2/index.html">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Shiny happy people coding" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-15589471-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Shiny happy people coding</a></h1>
+  
+    <h2>Coding with smile</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:blog-en.shingara.fr/" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/typo-5-4-0-released.html">Typo 5.4.0 Released</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-12-29T00:00:00+01:00" pubdate data-updated="true">Dec 29<span>th</span>, 2009</time>
+        
+         | <a href="/typo-5-4-0-released.html#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>That&#8217;s it. A new version of <a href="http://typosphere.org">Typo</a> is released. I don&#8217;t really participate to this
+  version, by lack of time and motivation, but I am allways proud to see a new version.</p>
+  <p>Each release see a new admin, but each time is allways better than previous. So it&#8217;s a good thing.
+  <p>My french blog is update and use this new version with new default design.</p>
+  <p>My little gift with this released is my capistrano config file to deploy it. It can be useful</p>
+
+  <typo:code>
+  set :application, &#8220;typo&#8221;
+  set :repository,  &#8220;git://github.com/fdv/typo.git&#8221;
+  set :domain, &#8220;blog.shingara.fr&#8221;
+
+  # If you aren&#8217;t deploying to /u/apps/#{application} on the target
+  # # servers (which is the default), you can specify the actual location
+  # # via the :deploy_to variable:
+  set :deploy_to, &#8220;/var/rails/blog-typo&#8221;
+  #
+  # # If you aren&#8217;t using Subversion to manage your source code, specify
+  # # your SCM below:
+  set :scm, :git
+
+  set :runner, &#8220;rails&#8221;
+  set :user, &#8220;rails&#8221;
+  set :use_sudo, false
+
+  set :thin_conf, &#8220;/etc/thin/#{domain}.yml&#8221;
+
+  role :app, domain
+  role :web, domain
+  role :db,  domain, :primary => true
+
+  task :update_config, :roles => [:app] do
+    run &#8220;cp -Rf #{shared_path}/config/* #{release_path}/config/&#8221;
+    run &#8220;ln -s #{shared_path}/files #{release_path}/public/files&#8221;
+  end
+
+  task :update_gems, :roles => [:app] do
+    run &#8220;cd #{release_path} && RAILS_ENV=production rake gems:install&#8221;
+  end
+
+
+  after &#8220;deploy:update_code&#8221;, :update_config
+  after &#8220;deploy:update_code&#8221;, :update_gems
+
+
+  namespace :deploy do
+    task :start, :roles => [:app] do
+      run &#8220;thin -C #{thin_conf} start&#8221;
+    end
+
+    task :stop, :roles => [:app] do
+      run &#8220;thin -C #{thin_conf} stop&#8221;
+    end
+
+    task :restart, :roles => [:app] do
+      run &#8220;thin -C #{thin_conf} restart&#8221;
+    end
+  end
+
+  task :clear_cache, :roles => [:app] do                                                                                                                       
+    run &#8220;cd #{current_path} && RAILS_ENV=production rake sweep_cache&#8221;
+    run &#8220;cd #{current_path} && RAILS_ENV=production rake tmp:cache:clear&#8221;
+  end
+
+  after &#8220;deploy:restart&#8221;, :clear_cache
+  after &#8220;deploy:start&#8221;, :clear_cache
+  </typo:code>
+
+  <p><a href="http://blog.shingara.fr/sortie-de-typo-5-4-0.html">Traduction française</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/oupsnow-0-4-0-released.html">Oupsnow 0.4.0 Released</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-12-01T00:00:00+01:00" pubdate data-updated="true">Dec 1<span>st</span>, 2009</time>
+        
+         | <a href="/oupsnow-0-4-0-released.html#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content">  <p>That&#8217;s it. I finally released Oupsnow 0.4.0. This version is a complete refactoring. After a oupsnow version 0.3.0 in Merb/DataMapper, this new 
+  version is with Rails and MongoDB. The server and the backend have changed.</p>
+
+  <p>But with the complete changed, there are some new features.</p>
+
+  <ul>
+  <li>Add filter by state in search ticket</li>
+  <li>Add possibility to change function of all member by project</li>
+  <li>Add preview in ticket and ticket updates</li>
+  <li>Add ticket&#8217;s milestone information in ticket show</li>
+  <li>Add ordering to all column in ticket search</li>
+  </ul>
+
+  <p>You can download it on <a href="http://rubyforge.org/frs/?group_id=7685">rubyforge</a></p>
+  <p>If you want try the <a href="http://oupsnow.shingara.fr">oupsnow demo version</a>, it&#8217;s online. The administrator login/password is : admin@admin.org/oupsnow Have fun.</p>
+
+  <p>The code source is hosted on github <a href="http://github.com/shingara/oupsnow">http://github.com/shingara/oupsnow</a></p>
+  <p>You can report any bug about it on my  <a href="http://dev.shingara.fr/projects/5/overview">own oupsnow instance</a></p>
+
+
+  <p><a href="http://blog.shingara.fr/sortie-de-oupsnow-0-4-0.html">Traduction française</a></p>   
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/oupsnow-from-merb-to-rails.html">Oupsnow From Merb to Rails</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-11-19T00:00:00+01:00" pubdate data-updated="true">Nov 19<span>th</span>, 2009</time>
+        
+         | <a href="/oupsnow-from-merb-to-rails.html#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content">  <p>Lately, I decided to migrate <a href="http://oupsnow.rubyforge.org">Oupsnow</a>, from Merb to Rails.</p>
+
+  <p>Just after ending my migration from SQL to MongoDB, I starting a new one but this one much more deep.</p>
+
+  <p>Why this migration ?</p>
+
+  <p>Rails 3. Since December 2008, almost one year later, Merb is allways freeze. Someone say that community is reviving and it&#8217;s true.
+  I am glad to see that, but Merb is really late now with one year of late. Even Rails don&#8217;t really improve in his stable version,
+  his edge move a lot.</p>
+
+  <p>Trying test all new technologies in Ruby, I will play with Rails 3. But no migrating too exists to migrate from Merb to Rails 3.
+  After a quick test, I see that difference between Rails 2.3.x and Rails 3 is little. So the migration from Rails 2.3.x to Rails 3 can be
+  more easily.</p>
+
+  <p>Like I want release soon as possible a stable version of Oupsnow. I decided to migrate Oupsnow to Rails 2.3.x before upgrade to
+  Rails 3. And this time, I maybe can release a stable version of Oupsnow compatible with Rails 3.</p>
+  
+  <p>Oupsnow become a project Rails/MongoMapper and no more a Merb/DataMapper project like before. Any help are welcome.</p>
+
+  <p><a href="http://blog.shingara.fr/oupsnow-de-merb-i-rails.html">Traduction française</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/rabbitmq-doesnt-works-with-macosx.html">RabbitMQ Doesn&#8217;t Works With MacOSX ?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-11-18T00:00:00+01:00" pubdate data-updated="true">Nov 18<span>th</span>, 2009</time>
+        
+         | <a href="/rabbitmq-doesnt-works-with-macosx.html#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content">  <p>A couple of week, I want go on using <a href="http://www.rabbitmq.com/">RabbitMQ</a>, I have a big issue.
+  With RabbitMQ, you need configure vhost and user. but I can&#8217;t connect to rabbitMQ by command <code>rabbitmqctl</code>.
+  Plan to upgrade my Mac to SnowLeopard I don&#8217;t found how fix this problem. RabbitMQ can be wait.</p>
+
+  <p>But after my upgrade, I install again RabbitMQ. to use again. But I was allways same issue. After a long search, I
+  found the cause. The hostname.</p>
+
+  <p>What made if your control node rabbitMQ can&#8217;t contact the master node ?</p>
+
+  <p>The solution is really simple. <code>hostname -s</code>. Add this one in your file <code>/etc/hosts</code> to ip 127.0.0.1. 
+  And now it&#8217;s works. Sometimes the solution is so easy.</p>
+
+  <p><a href="http://blog.shingara.fr/rabbitmq-ne-marche-pas-avec-mac-os.html">Traduction française</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/since-cucumber-0-3-4-he-has-difficult-with-merb.html">Since cucumber=0.3.4, He Has Difficult With Merb</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-05-24T00:00:00+02:00" pubdate data-updated="true">May 24<span>th</span>, 2009</time>
+        
+         | <a href="/since-cucumber-0-3-4-he-has-difficult-with-merb.html#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content">  <p>Since  <a href="http://cukes.info/">Cucumber</a> 0.3.4, there are a big change. With this change, you need modify your using of Cucumber with Merb. In <a href="http://github.com/aslakhellesoy/cucumber/blob/master/History.txt">History.txt</a> of Cucumber, you can read :</p>
+
+  <typo:code>
+  ** IMPORTANT UPGRADE NOTES FOR RAILS USERS **
+   
+  Running Cucumber features in the same Ruby interpreter as Rake doesn&#8217;t seem to work,
+  so you have to explicitly tell the task to fork (like it was doing by default in prior
+  versions). In lib/tasks/cucumber.rake:
+   
+    Cucumber::Rake::Task.new(:features) do |t| 
+      t.fork = true # Explicitly fork
+      t.cucumber_opts = %w{&#8211;format pretty}
+    end 
+   
+  (If you run script/generate cucumber this will be done for you).
+  Alternatively you can omit forking and run features like this:
+   
+    RAILS_ENV=test rake features
+   
+  However, setting the RAILS_ENV is easy to forget, so I don&#8217;t recommend relying on this.
+  </typo:code>
+  <p>This note is true to Merb user too. By default, all Merb user use the <a href="http://github.com/roman/merb_cucumber/tree/master">Roman&#8217;s merb_cucumber</a>. But the generator is not good now. The rake task <code>rake features</code> doesn&#8217;t use the good cucumber options.</p>
+  <p>After a long and big fight with cucumber, I success to find all good options. Now with this options, I have same behaviour than before. If you want see an example in a Merb application, you can see <a href="http://github.com/shingara/oupsnow/commit/13ab272f31bbf49537e9addc8166661ced91c694">my commit on Oupsnow</a>. I fork too the Roman merb_cucumber and add <a href="http://github.com/shingara/merb_cucumber/commit/317d64d45204c01a6ccbadfe1bd95e5ad06f7012">a patch to can use cucumber 0.3.4 and more</a>.</p>
+  
+  <p>EDIT : My modif of merb_cucumber is integrate to Roman branch.</p>
+
+  <p><a href="http://blog.shingara.fr/cucumber-0-3-4-et-merb-la-dure-cohabitation.html">Traduction française</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/oupsnow-0-2-0-released.html">Oupsnow 0.2.0 Released</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-02-10T00:00:00+01:00" pubdate data-updated="true">Feb 10<span>th</span>, 2009</time>
+        
+         | <a href="/oupsnow-0-2-0-released.html#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"> <p>After less of one month, There are a new version of <a href="http://oupsnow.rubyforge.org/">Oupsnow</a>. This new version 0.2.0 is the first, I use in production. Now, my <a href="http://dev.shingara.fr/">development platforme</a> is not manage by Redmine, it&#8217;s Oupsnow.</p>
+
+  <p>The news in this version are :</p>
+
+  <ul>
+  <li>A converter Redmine -> Oupsnow integrate. It&#8217;s with it, I can change my development platforme. without lost.</li>
+  </ul>
+
+  <p>to be added :</p>
+  <ul>
+  <li>A milestones management</li>
+  <li>A ticket&#8217;s state management</li>
+  <li>A ticket&#8217;s severity management</li>
+  <li>A formating with RedCloth</li>
+  </ul>
+  <p>After this release, I focus me on Typo and made <a href="http://typo.lighthouseapp.com/projects/11171/tickets/14-drop-acts_as_ressource-and-add-a-more-flexible-url-system">the big feature</a> in <a href="http://typo.lighthouseapp.com/projects/11171/milestones/29390-typo-53">5.2.1 version</a>.</p>
+
+  <p><a href="http://blog.shingara.fr/sortie-de-oupsnow-0-2-0-avec-mise-en-production.html">Traduction française</a></p>      
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/typo-5-2-0-released.html">Typo 5.2.0 Released</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-01-25T00:00:00+01:00" pubdate data-updated="true">Jan 25<span>th</span>, 2009</time>
+        
+         | <a href="/typo-5-2-0-released.html#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content">  <p>It&#8217;s my turn to announced the release of <a href="http://blog.typosphere.org/2009/01/25/typo-5-2-helmut-newton-for-rails-2-2-released">Typo 5.2</a>. This release is the first where I participe. Since august, I am a contributeur of <a href="http://typosphere.org/">Typo</a>. I start the migration of Typo with Rails 2.2 (before the official release). After we start with <a href="http://t37.net/">Frédéric</a> to improve the performance and the user experience of Typo.</p>
+
+  <p>Today with this released of Typo, the work is really good. We made maximum to be great. But we have not done. We have a lot of idea to integrate in Typo. We try too release more often.</p>
+
+  <p>A little gift, My capistrano file I use to deploy Typo.</p>
+
+  <typo:code lang="ruby">
+  set :application, &#8220;typo&#8221;
+  set :repository,  &#8220;git://github.com/fdv/typo&#8221;
+  set :domain, &#8220;shingara.fr&#8221;
+
+  # If you aren&#8217;t deploying to /u/apps/#{application} on the target
+  # servers (which is the default), you can specify the actual location
+  # via the :deploy_to variable:
+  set :deploy_to, &#8220;/var/rails/blog-typo&#8221;
+
+  # If you aren&#8217;t using Subversion to manage your source code, specify
+  # your SCM below:
+  set :scm, :git
+  set :git_enable_submodules, 1
+
+  set :runner, &#8220;rails&#8221;
+  set :user, &#8220;rails&#8221;
+  set :use_sudo, false
+  set :thin_conf, &#8220;/etc/thin/typo.yml&#8221;
+
+  role :app, domain
+  role :web, domain
+  role :db,  domain, :primary => true
+
+  task :update_config, :roles => [:app] do
+    run &#8220;ln -s #{shared_path}/config/database.yml #{release_path}/config/database.yml&#8221;
+    run &#8220;ln -s #{shared_path}/files #{release_path}/public/files&#8221;
+    run &#8220;ln -s #{shared_path}/cache #{release_path}/tmp/cache&#8221;
+    run &#8220;ln -s #{shared_path}/newrelic_rpm #{release_path}/vendor/plugins/newrelic_rpm&#8221;
+    run &#8220;ln -s #{shared_path}/config/newrelic.yml #{release_path}/config/newrelic.yml&#8221;
+    run &#8220;ln -s #{shared_path}/config/agent #{release_path}/config/agent&#8221;
+    run &#8220;ln -s #{shared_path}/config/mail.yml #{release_path}/config/mail.yml&#8221;
+  end
+
+  task :dump_before, :roles => [:app] do
+    run &#8220;pg_dump -U typoblog typo > #{shared_path}/typo#{Time::today.strftime(&#8216;%Y-%m-%d&#8217;)}.sql&#8221;
+  end
+
+  namespace :deploy do
+    task :start, :roles => [:app] do
+      run &#8220;thin -C #{thin_conf} start&#8221;
+    end
+
+    task :stop, :roles => [:app] do
+      run &#8220;thin -C #{thin_conf} stop&#8221;
+    end
+
+    task :restart, :roles => [:app] do
+      run &#8220;thin -C #{thin_conf} restart&#8221;
+    end
+  end
+
+  after &#8220;deploy:update_code&#8221;, :update_config
+  before &#8220;deploy:migrations&#8221;, :dump_before
+  </typo:code>
+
+  <p><a href="http://blog.shingara.fr/sortie-de-typo-5-2.html">Traduction Française</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/pretty-url-in-merb.html">Pretty URL in Merb</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-01-21T00:00:00+01:00" pubdate data-updated="true">Jan 21<span>st</span>, 2009</time>
+        
+         | <a href="/pretty-url-in-merb.html#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content">  <p>If like me, you are fan to pretty URL. You know how use it in RubyOnRails. You need define the return of method <code>to_params</code>. Using Merb, I want using same system in Merb. In first, I test modify the return of <code>to_params</code> method. But it&#8217;s not the way in Merb. The way is simpliest. You need using option <code>:identify</code> in you resource in your route. With this system I can define the methode <code>ticket_permalink</code> in Oupsnow as defin the pretty URL of ticket. After I just need define what I want in this URL. This return string to be allways use in my URL generated to define a ticket. Finally, I need define a method <code>def self.get_by_permalink(ticket_permalink)</code> that I use in place of <code>Ticket.get(id)</code>. I can update easily the URL to define my ticket.</p>
+
+  <p>But you need to know that all parameter define your ticket are allways the value of <code>:identity</code> option. Even in nested resource. No <code>id</code> and <code>ticket_id</code>. Only <code>ticket_permalink</code>.</p>
+  <p><a href="http://blog.shingara.fr/les-merb-pretty-url">Traduction Française</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/oupsnow-0-1-0-released.html">Oupsnow 0.1.0 Released</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-01-21T00:00:00+01:00" pubdate data-updated="true">Jan 21<span>st</span>, 2009</time>
+        
+         | <a href="/oupsnow-0-1-0-released.html#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content">  <p>I am really happy to released <a href="http://oupsnow.rubyforge.org/">Oupsnow</a>. After to participate to Redmine and using it, I decided to create my own bug tracker. I think redmine has some default. I finish by create my own bug tracker. It&#8217;s strongly inspired by Lighthouse which really simple to use it.</p>
+
+  <p>It&#8217;s the first version release after 2 month of development. It&#8217;s not a complete product. But it&#8217;s start to have a few feature to use it. In second, Oupsnow is a product using Merb. With this project I can be discover and improve my knowledge.</p>
+
+  <p>In next release, I will improve the administraion. I will create a converter from redmine to Oupsnow. After this creation, I will migrate to Oupsnow in place of Redmine to my <a href="http://dev.shingara.fr">development platforme</a></p>
+  
+<p>I install a <a href="http://oupsnow.shingara.fr">demo</a>. With it you can see what is Oupsnow.</p>
+
+  <p>In bonus, my <code>deploy.rb</code> file used to deploy my demo of Oupsnow by capistrano.</p>
+
+  <typo:code lang="ruby">
+  set :application, &#8220;oupsnow&#8221;
+  set :repository,  &#8220;git://github.com/shingara/oupsnow.git&#8221;
+  set :domain, &#8220;shingara.fr&#8221;
+
+  # If you aren&#8217;t deploying to /u/apps/#{application} on the target
+  # servers (which is the default), you can specify the actual location
+  # via the :deploy_to variable:
+  set :deploy_to, &#8220;/var/rails/oupsnow-demo&#8221;
+  set :deploy_via,            :remote_cache
+  set :repository_cache,      &#8220;#{application}-src&#8221;
+
+  # If you aren&#8217;t using Subversion to manage your source code, specify
+  # your SCM below:
+  # set :scm, :subversion
+  set :scm, :git
+  set :git_enable_submodules, 1
+
+  set :runner, &#8220;rails&#8221;
+  set :user, &#8220;rails&#8221;
+  set :use_sudo, false
+  set :rack_up, &#8220;/etc/thin/oupsnow-demo.ru&#8221;
+  set :merb_port, 46000
+
+  role :app, domain
+  role :web, domain
+  role :db,  domain, :primary => true
+
+  task :update_config, :roles => [:app] do
+    run &#8220;ln -s #{shared_path}/config/database.yml #{release_path}/config/database.yml&#8221;
+  end 
+
+  namespace :deploy do
+    task :start, :roles => [:app] do
+      run &#8220;merb -u #{user} -G #{user} -d -c 1 -p #{merb_port} -n #{application} -a thin -e production -m &#8216;#{deploy_to}/current/&#8217;&#8221;
+    end
+
+    task :stop, :roles => [:app] do
+      run &#8220;merb -u #{user} -G #{user} -d -c 1 -K all -p #{merb_port} -n #{application} -a thin -e production -m &#8216;#{deploy_to}/current/&#8217;&#8221;
+    end
+
+    task :restart, :roles => [:app] do
+      deploy.stop
+      deploy.start
+    end
+  end
+
+  after &#8220;deploy:update_code&#8221;, :update_config
+  </typo:code>
+
+  <p><a href="http://blog.shingara.fr/sortie-de-la-premiere-version-de-oupsnow-0-1-0.html">Traduction française</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/manage-your-dependencies-with-merb.html">Manage Your Dependencies With Merb</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-01-20T00:00:00+01:00" pubdate data-updated="true">Jan 20<span>th</span>, 2009</time>
+        
+         | <a href="/manage-your-dependencies-with-merb.html#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"> <p>How i use merb in my personal time and in my new open source project, I study more deeply the depedency system of Merb.</p>
+
+  <p>Merb is a gem based framework. In this way, all dependency need to be a gem and only gem.</p>
+
+  <h1>Using gem with Merb</h1>
+
+  <p>To use gem with Merb, it&#8217;s simply. You can use your local repository of gem or freeze another.</p>
+
+  <h2>Using your local gem repository</h2>
+
+  <p>If you use this technique, so no more simply. update the file <code>/config/dependencies.rb</code> to inform what gem you want load in your application. By exemple, the <code>dependencies.rb</code> file after a fresh merb installation.</p>
+
+  <typo:code lang='ruby'>
+  # dependencies are generated using a strict version, don&#8217;t forget to edit the dependency versions when upgrading.
+  merb_gems_version = &#8220;1.0.7.1&#8221;
+  dm_gems_version   = &#8220;0.9.8&#8221;
+
+  # For more information about each component, please read http://wiki.merbivore.com/faqs/merb_components
+  dependency &#8220;merb-action-args&#8221;, merb_gems_version
+  dependency &#8220;merb-assets&#8221;, merb_gems_version  
+  dependency &#8220;merb-cache&#8221;, merb_gems_version   
+  dependency &#8220;merb-helpers&#8221;, merb_gems_version 
+  dependency &#8220;merb-mailer&#8221;, merb_gems_version  
+  dependency &#8220;merb-slices&#8221;, merb_gems_version  
+  dependency &#8220;merb-auth-core&#8221;, merb_gems_version
+  dependency &#8220;merb-auth-more&#8221;, merb_gems_version
+  dependency &#8220;merb-auth-slice-password&#8221;, merb_gems_version
+  dependency &#8220;merb-param-protection&#8221;, merb_gems_version
+  dependency &#8220;merb-exceptions&#8221;, merb_gems_version
+   
+  dependency &#8220;dm-core&#8221;, dm_gems_version    
+  dependency &#8220;dm-aggregates&#8221;, dm_gems_version   
+  dependency &#8220;dm-migrations&#8221;, dm_gems_version   
+  dependency &#8220;dm-timestamps&#8221;, dm_gems_version   
+  dependency &#8220;dm-types&#8221;, dm_gems_version    
+  dependency &#8220;dm-validations&#8221;, dm_gems_version  
+
+  dependency &#8220;merb_datamapper&#8221;, merb_gems_version
+  dependency &#8220;do_sqlite3&#8221; # If using another database, replace this
+  </typo:code>
+
+  <p>We can list all gems of Merb and Datamapper to want use it. If we want use new one. you can just update this list. You can delete it too, if you want less loading gem, because you don&#8217;t use it.</p>
+
+  <h2>Using a local gem repository in your application</h2>
+<p>It&#8217;s a different point in comparaison to RubyOnRails. In my point of view, it&#8217;s better than Rails system. The idea is simple. Rubygems can be define a directory where all gem are. So why don&#8217;t put this directory in your application?</p>                             
+
+  <p>To using this technique, you need create the directory <code>/gems</code> in your application. After use the thor task to install your wanted gem in your new gem repository. You can install merb-core and datamapper with follow command:</p>
+
+  <typo:code lang="plain">
+  $ thor merb:gem:install merb-core dm-core
+  </typo:code>
+
+  <p>Once all dependencies are install, you can freeze your application with all using gem.</p>
+
+  <p>If you want use a source manager, you just need add the directory <code>/gems/cache</code>. This directory contains all <code>gem</code> files using. The other directory can be generate after. So when you get some sources, you just need made the thor task of deployement:</p>
+
+  <typo:code lang="plain">
+  $ thor merb:gem:redeploy
+  </typo:code>
+
+  <p>All gems in your cache directory to install in your gems directory. I found this system better than rails because, if you have some gem with C extension, you can freeze it in your merb application. All extension can be compiled in other system. You can&#8217;t to do that with Rails.</p>
+
+  <h1>But if I want use developpement version. How can I do ?</h1>
+
+  <p>It&#8217;s the weakly point of Merb in comparison with Rails. With Rails, it&#8217;s easy. We put some sources in directory <code>/vendor</code> and all works. A simple <code>git submodule</code> allow to track the dependencies evolution. Merb can&#8217;t allow that. Merb load only gem.</p>
+
+  <h2>Core-team recommandation</h2>
+
+  <p>This technique recommand by core-team is based on gem. You need generate gem on your developpement source. Add it on your directory <code>gems/cache</code> and after using it. there are some thor task to help you to do that. By exemple, you can install the developpment version with command : </p>
+
+  <typo:code lang="plain">
+  $ thor merb:source:install dm-core
+  </typo:code>
+
+  <p>This task clone the dm-core repository in your directory <code>/src/</code>, generate the gem and install it in your directory <code>/gem</code>. You can made same thing with push source directly inside <code>/src/</code> directory and use this name directory. it&#8217;s launch the <code>rake package</code> and install the generated gem.</p>
+
+  <p>I thing that it&#8217;s not really good, because you can&#8217;t know what it&#8217;s really this gem use it. The version number gem is fixe and we can&#8217;t know how commit use it. I like know just after a clone of project what commit it&#8217;s use on each gem.</p>
+
+  <h2>My personnal technique avoid generated gem</h2>
+
+  <p>This technique working, but it&#8217;s not the  better. In my file <code>config/init.rb</code>, I created a little method:</p>
+
+  <typo:code lang='ruby'>
+  def load_from_source(src)
+    $:.unshift File.join(Merb.root, &#8220;src/#{src}/lib&#8221;)
+    require &#8220;src/#{src}/init.rb&#8221;
+  end
+  </typo:code>
+
+  <p>After in the before_app_loads callback, I can call this method.</p>
+<typo:code lang="ruby">
+  Merb::BootLoader.before_app_loads do
+    # This will get executed after dependencies have been loaded but before your app&#8217;s classes have loaded.
+    load_from_source(&#8216;will_paginate&#8217;)
+  end
+  </typo:code>
+  <p>Now with a will_paginate clone repository in my directory <code>/src/</code> will_paginate can be loaded before the application load and after all dependencies load.</p>
+
+  <p>BUt this technique has a big issue. I can&#8217;t fixed it without some patch to Merb (I made it maybe, even Merb is a little dead in futur :&#8217;( ). So we can load from source only after all dependencies. If you want load some source in middle of dependency, you can&#8217;t . Yo
+u need using gem system.</p>
+  <h2>What not to do</h2>
+
+  <p>I made it, so i say to you don&#8217;t to do. You can&#8217;t using require in your dependencies file. If you require in this file. your sources are loaded before all dependency. All dependency list on this file are loaded after. So you can to have problem with loading order.<
+/p>
+
+  <p><a href="http://blog.shingara.fr/gestion-des-dependances-avec-merb.html">Traduction Francaise</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/blog/page/3/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/why-i-stop-using-decent-exposure.html">Why I stop using decent_exposure</a>
+      </li>
+    
+      <li class="post">
+        <a href="/test-your-rabl-view.html">Test your Rabl&#8217;s view</a>
+      </li>
+    
+      <li class="post">
+        <a href="/vundle-the-bundler-of-vim.html">vundle the bundler of vim</a>
+      </li>
+    
+      <li class="post">
+        <a href="/dante-lets-you-put-some-daemon-in-your-code.html">Dante lets you put some daemon in your code</a>
+      </li>
+    
+      <li class="post">
+        <a href="/moped-the-new-mongodb-ruby-driver.html">Moped the new mongoDB ruby driver</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  
+  <a href="https://github.com/shingara">@shingara</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'shingara',
+            count: 10,
+            skip_forks: false,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("shingara", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/shingara" class="twitter-follow-button" data-show-count="true">Follow @shingara</a>
+  
+</section>
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Cyril Mougel -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'blog-en-shingara';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

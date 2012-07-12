@@ -1,0 +1,390 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Why I stop using decent_exposure - Shiny happy people coding</title>
+  <meta name="author" content="Cyril Mougel">
+
+  
+  <meta name="description" content="After the release of decent_exposure, I was really happy.
+I use before inherited_ressources, but
+I started to discover some issue. If you want &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://blog-en.shingara.fr//why-i-stop-using-decent-exposure.html">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Shiny happy people coding" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-15589471-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Shiny happy people coding</a></h1>
+  
+    <h2>Coding with smile</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:blog-en.shingara.fr/" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Why I Stop Using Decent_exposure</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-11T09:49:00+02:00" pubdate data-updated="true">Jul 11<span>th</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>After the release of <a href="https://github.com/voxdolo/decent_exposure">decent_exposure</a>, I was really happy.
+I use before <a href="https://github.com/josevalim/inherited_resources/">inherited_ressources</a>, but
+I started to discover some issue. If you want customize your controller,
+it can be hard and not really readable and maintanable. Inherited
+ressources is really great if you not want customize it. And you can&#8217;t
+test your controller directly with inherited ressources like explain on
+the readme.</p>
+
+<p>The big advantage of <code>decent_exposure</code> to me is the capability to access
+variable directly in your views. No more need call instance variables.
+You just need call the method directly. You have a eager loading of your
+object because you not need instanciate in your controller if you don&#8217;t
+need into it. It&#8217;s just instanciate when you want it. A memoization
+system help you to avoid multiple DB call. This technique help the reuse
+of some view or partial, because you don&#8217;t need instanciate an instance
+in your action. if you expose it you can call it easily. If this method
+expose is not use, nothing happen. In your partial you can override some
+variables expose by <code>:locals</code> params. I see a lot of interest in using
+<code>decent_exposure</code></p>
+
+<p>But after a usage of it. All this interest are add by using the
+<code>helper_method</code> class method in your controller. So if you create a
+method with eager loading inside and expose it with <code>helper_method</code> you
+have you own decent exposure with builtin method and decent exposure
+become useless.</p>
+
+<p><code>decent_exposure</code> was to me a discover of usage and capability of
+<code>helper_method</code>. But after using it on several real project, I think all
+hiding code by decent exposure can be disturbing. By example, decent
+exposure do an <code>update_attributes</code> on your object if a params of this
+object is discover. So in some case I do this <code>update_attributes</code> twice.
+One in expose method and one in my action. There are no big deal but in
+some case it introduce some bug and it&#8217;s hard to understand what happen
+easily and you lost several hours to fix this bug.</p>
+
+<p>Another limitation to me is the override of this expose. To avoid
+multiple if inside, you can want assign your eager loading before
+calling this expose method.</p>
+
+<p>Une des limitations de <code>decent_exposure</code> selon moi est l&#8217;override de
+cette méthode. Parfois pour éviter les <code>if</code> infini dans cette méthode il
+est plus judicieux de définir directement la valeur de retour de cette
+méthode dans sa méthode d&#8217;action. Cela permet de savoir exactement ce
+que retourne cette méthode, mais aussi d&#8217;éviter les conflits dans
+d&#8217;autre action.</p>
+
+<p>Pour réalisé cela ma méthode stocke en mémoisation la variable
+d&#8217;instance égale au nom de la méthode. Ainsi ma méthode ressemble à ceci
+:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">post</span>
+</span><span class='line'>  <span class="vi">@post</span> <span class="o">||=</span> <span class="no">Post</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="n">helper_method</span> <span class="ss">:post</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Si je souhaite donc avoir un nouveau Post retourné par cette méthode
+j&#8217;ai juste à faire :</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">new</span>
+</span><span class='line'>  <span class="vi">@post</span> <span class="o">=</span> <span class="no">Post</span><span class="o">.</span><span class="n">new</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Je surcharge le retour de la méthode post par la valeur <code>Post.new</code>. Pour
+faire cela avec <code>decent_exposure</code> il faut surchargé la variable
+<code>@_resource[:post]</code>. Mais rien ne m&#8217;assure que ce nom de variable d&#8217;instance
+soit conservé dans les futurs version de <code>decent_exposure</code>. Une solution serait peut-être de créer une
+méthode <code>post=()</code> lors de l&#8217;exposition d&#8217;un <code>post</code>, mais cela devient
+peut-être moins pratique.</p>
+
+<p>Voilà donc les raisons de mon arrêt d&#8217;utilisation de <code>decent_exposure</code>.
+Je peux très facilement émuler le comportement de <code>decent_exposure</code> et
+tout ça sans aucune dépendance externe.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Cyril Mougel</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-11T09:49:00+02:00" pubdate data-updated="true">Jul 11<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/decent-exposure/'>decent_exposure</a>, <a class='category' href='/blog/categories/rails/'>rails</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog-en.shingara.fr//why-i-stop-using-decent-exposure.html" data-via="shingara" data-counturl="http://blog-en.shingara.fr//why-i-stop-using-decent-exposure.html" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/test-your-rabl-view.html" title="Previous Post: Test your Rabl's view">&laquo; Test your Rabl's view</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/why-i-stop-using-decent-exposure.html">Why I stop using decent_exposure</a>
+      </li>
+    
+      <li class="post">
+        <a href="/test-your-rabl-view.html">Test your Rabl's view</a>
+      </li>
+    
+      <li class="post">
+        <a href="/vundle-the-bundler-of-vim.html">vundle the bundler of vim</a>
+      </li>
+    
+      <li class="post">
+        <a href="/dante-lets-you-put-some-daemon-in-your-code.html">Dante lets you put some daemon in your code</a>
+      </li>
+    
+      <li class="post">
+        <a href="/moped-the-new-mongodb-ruby-driver.html">Moped the new mongoDB ruby driver</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/shingara">@shingara</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'shingara',
+            count: 10,
+            skip_forks: false,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("shingara", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/shingara" class="twitter-follow-button" data-show-count="true">Follow @shingara</a>
+  
+</section>
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Cyril Mougel -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'blog-en-shingara';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog-en.shingara.fr//why-i-stop-using-decent-exposure.html';
+        var disqus_url = 'http://blog-en.shingara.fr//why-i-stop-using-decent-exposure.html';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

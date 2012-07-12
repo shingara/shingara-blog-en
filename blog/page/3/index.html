@@ -1,0 +1,609 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Shiny happy people coding</title>
+  <meta name="author" content="Cyril Mougel">
+
+  
+  <meta name="description" content="With Merb-mailer, merb offer a system to send email. But merb is a web framework ORM agnostic. So merb-mailer is like a controller, not a model like &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://blog-en.shingara.fr//blog/page/3/index.html">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Shiny happy people coding" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-15589471-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Shiny happy people coding</a></h1>
+  
+    <h2>Coding with smile</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:blog-en.shingara.fr/" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/send-email-with-merb-mailer-in-datamapper-model.html">Send Email With Merb-mailer in Datamapper Model</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-12-20T00:00:00+01:00" pubdate data-updated="true">Dec 20<span>th</span>, 2008</time>
+        
+         | <a href="/send-email-with-merb-mailer-in-datamapper-model.html#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content">  <p>With Merb-mailer, merb offer a system to send email. But merb is a web framework ORM agnostic. So merb-mailer is like a controller, not a model like in Rails. So the send_mail method is available only in controller. But how use this method in our Datamapper model? It&#8217;s really simple because Merb use the good way in Ruby and help to use that.</p>
+
+  <p>After a short research in code of merb-mailer. I look that the send_mail method is in Mixin. After include this mixin in your class, you can use the send_mail method.</p>
+
+  <typo:code lang="ruby">
+  class Member
+    include DataMapper::Resource
+    include Merb::MailerMixin
+
+    property :id, Serial
+    property :name, String
+
+    def register
+      // some code
+      send_mail (UserMailer, :register, {
+                :from => &#8220;no-reply@example.com&#8221;,
+                :to => person.email,
+                :subject => &#8220;Please activate your account&#8221; 
+               }   
+    end 
+  end 
+  </typo:code>
+
+  <p><a href="http://blog.shingara.fr/envoyer-un-email-dans-un-model-datamapper">Traduction française</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/pictrails-0-6-0-released.html">Pictrails 0.6.0 Released</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-11-18T00:00:00+01:00" pubdate data-updated="true">Nov 18<span>th</span>, 2008</time>
+        
+         | <a href="/pictrails-0-6-0-released.html#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content">  <p>Since 1 month, a new release of <a href="http://pictrails.rubyforge.org">Pictrails</a> is out.</p>
+  <p>There are no big modification neither big new feature. Only two features added. They come after user&#8217;s ask.</p>
+  <p>The first feature is possibility to copy picture in other gallery. Sometimes that can be useful.</p>
+  <p>The other feature is possibility to define picture in front of gallery. In previous release, you can&#8217;t define the picture in front. Now you can define by random or by selecting the picture in front of gallery.</p>
+  <p>This version is lastest to support by Rails 2.1. Now the HEAD go to Rails 2.2 release soon.</p>
+  <p>You can <a href="http://rubyforge.org/frs/?group_id=5385&release_id=2838">download this new version</a> and install it.</p>
+
+  <p><a href="http://blog.shingara.fr/2008/11/18/sortie-de-pictrails-0-6-0">Traduction française</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/delete-all-anonymous-message-in-forum-redmine.html">Delete All Anonymous Message in Forum Redmine</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-11-14T00:00:00+01:00" pubdate data-updated="true">Nov 14<span>th</span>, 2008</time>
+        
+         | <a href="/delete-all-anonymous-message-in-forum-redmine.html#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content">  <p>If you had open your redmine forum to anonymous, to avoid logged user to post in your forum, You can be attack by spam, because redmine haven&#8217;t anti-spam. You can be in same position of me :</p>
+  <p> 
+    <img src="http://blog.shingara.fr/files/snapshoot_spam_forum_redmine.png" alt="screenshot de mon forum redmine spammé" />
+  </p>
+
+  <p>Once you have block anonymous message, you need delete all spam message. So you can delete each message one by one. Or use the rails console to delete all. Warning. if you have some real user to post in anonymous. My command delete this message too.</p>
+
+  <typo:code>
+  rails@shinydedi /var/rails/redmine/current $ ./script/console production    
+  Loading production environment (Rails 2.0.2)  >> User.anonymous
+  => #<AnonymousUser id: 4, login: "", hashed_password: "", firstname: "", lastname: "Anonymous", mail: "", mail_notification: false, admin: false, status: 0, last_login_on: nil, language: "", auth_source_id: nil, created_on: "2008-01-26 16:39:30", updated_on: "2008-01-26 16:39:30", type: "AnonymousUser">
+  >> User.anonymous.id
+  => 4
+  >> Message.find_all_by_author_id(User.anonymous.id).size
+  => 1693
+  >> Message.find_all_by_author_id(User.anonymous.id).each { |me| me.destroy }
+  => [&#8230;&#8230;&#8230;]
+  >>  
+  </typo:code>
+
+  <p><a href="http://blog.shingara.fr/supprimer-tous-les-messages-danonyme-du-forum-redmine.html">Traduction Francaise</a></p>
+~                                                                                                                                        
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/activate-user-in-redmine-by-rails-console.html">Activate User in Redmine by Rails Console</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-11-13T00:00:00+01:00" pubdate data-updated="true">Nov 13<span>th</span>, 2008</time>
+        
+         | <a href="/activate-user-in-redmine-by-rails-console.html#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"> <p>If during a moment, you send mail are block and you have redmine. All new users can&#8217;t receive their activation. Redmine can&#8217;t activate by admin interface. You need use Rails console to activate this users.</p>
+  <p>In this example, we activate the user with login &#8216;ook&#8217;</p>
+  <p>First, connect in rails console in production mode.</p>
+
+  <typo:code>
+  $ ./script/console production
+  </typo:code>
+
+  <p>When you are in console, search the user, change his state and delete the activation token.</p>
+  <typo:code>
+  rails@shinydedi /var/rails/redmine/current $ ./script/console production
+  Loading production environment (Rails 2.0.2)  >> u = User.find_by_login &#8216;ook&#8217;
+  => #<User id: 7, login: "ook", hashed_password: "8a45629b374f3e667ea72494246b17a11309ffff", firstname: "Thomas", lastname: "XXX", mail: "thomas@xxx.com", mail_notification: false, admin: false, status: 2, last_login_on: nil, language: "fr", auth_source_id: nil, created_on: "2008-10-27 18:50:54", updated_on: "2008-10-27 18:50:54", type: nil>
+  >> u.status = User::STATUS_ACTIVE
+  => 1
+  >> u.save
+  => true
+  >> t = Token.find_by_action_and_user_id(&#8216;register&#8217;, u.id)
+  => #<Token id: 16, user_id: 7, action: "register", value: "brVmdX8Sf0IecApDEWs0BmiD6ZN3DgsDoshpBZ2e", created_on: "2008-10-27 18:50:54">
+  >> t.destroy
+  => #<Token id: 16, user_id: 7, action: "register", value: "brVmdX8Sf0IecApDEWs0BmiD6ZN3DgsDoshpBZ2e", created_on: "2008-10-27 18:50:54">
+  </typo:code>
+
+  <p>It&#8217;s works. Now your user ook can be logged in redmine without his activation mail.</p>
+  <p><a href="http://blog.shingara.fr/activer-un-compte-redmine-par-la-console-rails.html">Traduction Francaise</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/pictrails-0-5-0-released.html">Pictrails 0.5.0 Released</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-10-04T00:00:00+02:00" pubdate data-updated="true">Oct 4<span>th</span>, 2008</time>
+        
+         | <a href="/pictrails-0-5-0-released.html#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content">  <p>Just before my birthday in 11 October, I release a new version of <a href="http://pictrails.rubyforge.org">Pictrails</a>.</p>
+
+  <p>To this new version, the big ehancement is to add comment. Now all picture can be commented. In administration, there are possibility to manage this comment to delete and edit. It&#8217;s little simple now, but this just beginning. If you want format your comment, you can with redcloth format.</p>
+  <p>About ergonomy, I add the view of previous and next picture in same gallery. This feature wasn&#8217;t in Pictrails. This mistake fixed.</p>
+  <p>The picture sort by created in gallery.</p>
+  <p>All feedback is good and some design. A <a href="http://pictrails.shingara.fr/">demo</a> is always online with login by admin/pictrails in /admin url.</p>
+  <p><a href="http://blog.shingara.fr/2008/10/04/sortie-de-pictrails-0-5-0">Traduction française</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/profile-a-request-in-rails.html">Profile a Request in Rails</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-09-03T00:00:00+02:00" pubdate data-updated="true">Sep 3<span>rd</span>, 2008</time>
+        
+         | <a href="/profile-a-request-in-rails.html#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content">  <p>To found the <a href="http://blog.shingara.fr/en/2008-08-01-gettext-with-rails-can-be-long-in-an-error-form.html">bug that speak before </a>, I would made a request profiling to know where a long time is spend during the rendering of this page</p>
+
+  <h1>How using the script Request Profiler</h1>
+
+  <p>Since Rails 2.0, there are a new script, <code>script/performance/request</code>. This script made a profile on one or several internet requests.</p>
+
+  <p>To define the request, you just need write a script like an integration test. This example come from rails&#8217;s changelog.</p>
+
+  <typo:code lang="ruby">
+  get_with_redirect &#8216;/&#8217; 
+  say &#8220;GET / => #{path}&#8221;
+  post_with_redirect &#8216;/sessions&#8217;, :username => &#8216;john&#8217;, :password => &#8216;doe&#8217;
+  say &#8220;POST /sessions => #{path}&#8221;
+  </typo:code>
+
+  <p>Once script created, launch the script with number of request made in option</p>
+
+
+  <typo:code>$ ./script/performance/request -n 10 login_session.rb</typo:code>
+
+  <p>But there are no system (for me) to define session values in start. Before, you made the login connection by example, if you want a user connected</p>
+
+  <h1> Incompatibility between Rails 2.1 and ruby-prof</h1>
+  <p>So the Living on the Edge speak about add new script needeed ruby-prof-0.6.1, I thought it&#8217;s the alone need ruby-prof-0.6.1. This version doesn&#8217;t exist in rubyforge yet (last version is 0.6.0). But it&#8217;s not true. Since rails 2.1, the script performance/request need too ruby-prof-0.6.1. But this version is not release yet. 
+  You need to make and to install this gem to add this functionnality. 
+  In fact, even if you update rails code, doesn&#8217;t check the ruby-prof gem version, the version 0.6.0 haven&#8217;t all methode needed.
+  </p>
+
+  <h1> Make and install ruby-prof-0.6.1</h1>
+
+  <p>You need get sources since ruby-prof svn</p>
+  <typo:code>svn co http://ruby-prof.rubyforge.org/svn/</typo:code>
+  <p>After, you generate the gem</p>
+  <typo:code>$ rake package</typo:code>
+  <p>In end, you can install the gem</p>
+  <typo:code># gem install pkg/ruby-prof-0.6.1.gem</typo:code>
+  <p>Now, you have ruby-prof-0.6.1 install in you system and you can use the script performance/request.</p>
+  <p><a href="http://blog.shingara.fr/2008/09/03/profiler-une-requete-rails">Traduction française</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/gettext-with-rails-can-be-long-in-an-error-form.html">Gettext With Rails Can Be Long in an Error Form</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-08-01T00:00:00+02:00" pubdate data-updated="true">Aug 1<span>st</span>, 2008</time>
+        
+         | <a href="/gettext-with-rails-can-be-long-in-an-error-form.html#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content">  <p>Today, I spend all the day try understand a problem in my application, develop in my new job. This bug is very simple. During the form validation, if it&#8217;s not validate by rails, my controller render the same action with field in error. Normally, it&#8217;s simple. But in my case, the page spend more 40 second to render. After read log, the problem is not in controller, but in my rendering page.</p>  
+  <p>To understand all, I create a profil to my request with the script <code>/script/performance/request</code> (after a fight against). Once the profil create, I analyse that my problem was a search of translate error message that process a lot of. After a long time to search, I found the problem.</p>    <p> In rails, during the tag creation with helper method, there are a call to <code>errors.on</code> to know where is the error and highlight this field. But where in rails there are just a call to hash, Gettext has alias method and search in each call the translation. In production, this call is light because all translation cached. But in developpment mode, there are no cache. So each time, Gettext load the mo file and iterate on all translation string to find the good translation. It&#8217;s this iteration that spend a lot of time and explain the long time to wait the rendering.</p>
+  
+  <p>This behaviour is only in developpment environment, because there are test on this environment name. In all environment, all translation cached.</p>  
+  <p>To resolv this problem, you can change the default environement with another name like dev otherwise development. In this case, all translation cached. You can alsa write this code <code>GetText.cached = true</code> in your envionnement.rb. But with this configuration, when you update mo file, you need restart your serveur to obtains translate entries.</p> 
+  <p><a href="http://blog.shingara.fr/gettext-avec-Rails-ca-peux-etre-long-pour-un-formulaire-en-erreur.html">Traduction française</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/blog/page/2/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/why-i-stop-using-decent-exposure.html">Why I stop using decent_exposure</a>
+      </li>
+    
+      <li class="post">
+        <a href="/test-your-rabl-view.html">Test your Rabl&#8217;s view</a>
+      </li>
+    
+      <li class="post">
+        <a href="/vundle-the-bundler-of-vim.html">vundle the bundler of vim</a>
+      </li>
+    
+      <li class="post">
+        <a href="/dante-lets-you-put-some-daemon-in-your-code.html">Dante lets you put some daemon in your code</a>
+      </li>
+    
+      <li class="post">
+        <a href="/moped-the-new-mongodb-ruby-driver.html">Moped the new mongoDB ruby driver</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  
+  <a href="https://github.com/shingara">@shingara</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'shingara',
+            count: 10,
+            skip_forks: false,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("shingara", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/shingara" class="twitter-follow-button" data-show-count="true">Follow @shingara</a>
+  
+</section>
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Cyril Mougel -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'blog-en-shingara';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

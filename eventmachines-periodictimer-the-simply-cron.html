@@ -1,0 +1,364 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>EventMachine's PeriodicTimer the simply cron - Shiny happy people coding</title>
+  <meta name="author" content="Cyril Mougel">
+
+  
+  <meta name="description" content="EventMachine is one of the best Ruby libraries. But it&#8217;s also the most unknown and unused. I started to look at Event Machine and where I could &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://blog-en.shingara.fr//eventmachines-periodictimer-the-simply-cron.html">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Shiny happy people coding" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-15589471-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Shiny happy people coding</a></h1>
+  
+    <h2>Coding with smile</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:blog-en.shingara.fr/" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">EventMachine's PeriodicTimer the Simply Cron</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-04-02T00:00:00+02:00" pubdate data-updated="true">Apr 2<span>nd</span>, 2010</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><a href="http://rubyeventmachine.com/">EventMachine</a> is one of the best Ruby libraries. But it&#8217;s also the most unknown and unused.</p>
+
+<p>I started to look at Event Machine and where I could use it. The first application I found was the <a href="http://eventmachine.rubyforge.org/EventMachine/PeriodicTimer.html">PeriodicTimer</a>.</p>
+
+<p>This feature aims to replace the cronjob.</p>
+
+<p>Let me explain : a cronjob is really a great tool. We can precisely define the time where task is executed. Usually, this task executes precisely at a given time… But when a task is executed too soon, using a cronjob can become awful.</p>
+
+<p>Cron doesn&#8217;t have any queue system, therefore there can be an increase of the number of tasks running at same time. Your server might become overloaded and in that case you&#8217;d have to restart it. This situation would happen only if your task is created to be executed more times than your frequency of execution.</p>
+
+<p>The solution can be to have a little application like <a href="http://forge.bearstech.com/trac/wiki/JobQueue">jobq</a> to manage your queue system. But in many cases you don&#8217;t really need a queue system, so it would be a little bit like overkill.</p>
+
+<p>The PeriodicTime&#8217;s advantage is to execute after a time define precisely. There is no management of time: only the elapse time needs to be managed. The task is sent after X seconds after the end of the previous task and when there are no tasks running anymore. There might be some little variations in the time the task will execute, but it&#8217;s not really a problem. The most important is that the task is executed regularly (e.g. when fetching statistics).</p>
+
+<p>Below is [a sample of code]http://gist.github.com/345000)  using PeriodicTimer.</p>
+
+<p>&lt;typo:code lang=&#8221;ruby&#8221;>
+require &#8216;eventmachine&#8217;
+require &#8216;timeout&#8217;
+EventMachine.run {
+ EventMachine::PeriodicTimer.new(10) do
+   puts &#8220;#{Time.now} : I am 10&#8221;
+   sleep 10
+ end</p>
+
+<p> EventMachine::PeriodicTimer.new(1) do
+   puts Time.now
+ end
+}
+&lt;/typo:code></p>
+
+<p>And the output is after 50 second of execution.</p>
+
+<p>&lt;typo:code lang=&#8221;plain&#8221;>
+$ ruby em_periodic.rb
+Fri Mar 26 16:07:39 +0100 2010
+Fri Mar 26 16:07:40 +0100 2010
+Fri Mar 26 16:07:41 +0100 2010
+Fri Mar 26 16:07:42 +0100 2010
+Fri Mar 26 16:07:43 +0100 2010
+Fri Mar 26 16:07:44 +0100 2010
+Fri Mar 26 16:07:45 +0100 2010
+Fri Mar 26 16:07:46 +0100 2010
+Fri Mar 26 16:07:47 +0100 2010
+Fri Mar 26 16:07:48 +0100 2010 : I am 10
+Fri Mar 26 16:07:58 +0100 2010
+Fri Mar 26 16:07:59 +0100 2010
+Fri Mar 26 16:08:00 +0100 2010
+Fri Mar 26 16:08:01 +0100 2010
+Fri Mar 26 16:08:02 +0100 2010
+Fri Mar 26 16:08:03 +0100 2010
+Fri Mar 26 16:08:04 +0100 2010
+Fri Mar 26 16:08:05 +0100 2010
+Fri Mar 26 16:08:06 +0100 2010
+Fri Mar 26 16:08:08 +0100 2010
+Fri Mar 26 16:08:08 +0100 2010 : I am 10
+Fri Mar 26 16:08:18 +0100 2010
+Fri Mar 26 16:08:19 +0100 2010
+Fri Mar 26 16:08:20 +0100 2010
+Fri Mar 26 16:08:21 +0100 2010
+Fri Mar 26 16:08:22 +0100 2010
+Fri Mar 26 16:08:23 +0100 2010
+Fri Mar 26 16:08:25 +0100 2010
+Fri Mar 26 16:08:26 +0100 2010
+Fri Mar 26 16:08:27 +0100 2010
+Fri Mar 26 16:08:28 +0100 2010
+Fri Mar 26 16:08:28 +0100 2010 : I am 10
+&lt;/typo:code></p>
+
+<p>We can see that the task is executed each second. But the other task executing after 10 seconds, runs and locks the thread. So the first task (executing each second) is executed only after the end of second one. After that, each second the task restarts. and locks again after 10 seconds.</p>
+
+<p>This is really the great strength of PeriodicTimer. We can easily make a suite of tasks who will never execute at the same time. Lately I&#8217;m using this for all my scripts fetching data.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Cyril Mougel</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-04-02T00:00:00+02:00" pubdate data-updated="true">Apr 2<span>nd</span>, 2010</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog-en.shingara.fr//eventmachines-periodictimer-the-simply-cron.html" data-via="shingara" data-counturl="http://blog-en.shingara.fr//eventmachines-periodictimer-the-simply-cron.html" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/.html" title="Previous Post: about">&laquo; about</a>
+      
+      
+        <a class="basic-alignment right" href="/one-day-dedicated-to-mongodb.html" title="Next Post: One day dedicated to MongoDB">One day dedicated to MongoDB &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/why-i-stop-using-decent-exposure.html">Why I stop using decent_exposure</a>
+      </li>
+    
+      <li class="post">
+        <a href="/test-your-rabl-view.html">Test your Rabl's view</a>
+      </li>
+    
+      <li class="post">
+        <a href="/vundle-the-bundler-of-vim.html">vundle the bundler of vim</a>
+      </li>
+    
+      <li class="post">
+        <a href="/dante-lets-you-put-some-daemon-in-your-code.html">Dante lets you put some daemon in your code</a>
+      </li>
+    
+      <li class="post">
+        <a href="/moped-the-new-mongodb-ruby-driver.html">Moped the new mongoDB ruby driver</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/shingara">@shingara</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'shingara',
+            count: 10,
+            skip_forks: false,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("shingara", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/shingara" class="twitter-follow-button" data-show-count="true">Follow @shingara</a>
+  
+</section>
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Cyril Mougel -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'blog-en-shingara';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: gem | Shiny happy people coding]]></title>
+  <link href="http://blog-en.shingara.fr//blog/categories/gem/atom.xml" rel="self"/>
+  <link href="http://blog-en.shingara.fr//"/>
+  <updated>2012-07-12T09:34:41+02:00</updated>
+  <id>http://blog-en.shingara.fr//</id>
+  <author>
+    <name><![CDATA[Cyril Mougel]]></name>
+    <email><![CDATA[cyril.mougel@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Dante lets you put some daemon in your code]]></title>
+    <link href="http://blog-en.shingara.fr//dante-lets-you-put-some-daemon-in-your-code.html"/>
+    <updated>2012-05-11T09:54:00+02:00</updated>
+    <id>http://blog-en.shingara.fr//dante-lets-you-put-some-daemon-in-your-code</id>
+    <content type="html"><![CDATA[<p>Few days ago, I needed to convert a ruby script into daemon.</p>
+
+<p>In my deployment toolkit, I use monitrc to monitor my scripts. Monit
+checks a pidfile to know if the process is running or not.</p>
+
+<p>So, I looked the best ruby solution to easily to transform this script in deamon
+generating its own pidfile.</p>
+
+<p>The most popular project in ruby to convert a ruby script into daemon is
+<a href="http://daemons.rubyforge.org/">daemons</a>. I've tried several times in the past
+and never became fan. It's too complicated and doesn't generate pidfile.
+You have to manage everything yourself.</p>
+
+<p>The second big project about managing daemon in the ruby community is
+<a href="https://github.com/kennethkalmer/daemon-kit">daemon-kit</a>. I've tried it
+several times without success. To me, it's way too big and not
+flexible enough to use on a simple daemon script.</p>
+
+<p>Therefore, I decided to see if the ruby community had a new
+gem for this purpose. I discovered <a href="https://github.com/bazaarlabs/dante">dante</a>.
+This project was exactly what I really needed. It really gets the job done.</p>
+
+<p>By default, Dante manages few options in commandline. These options
+are all what you really need. No more useless stuff.</p>
+
+<p>Default options available :</p>
+
+<p>```</p>
+
+<pre><code>-p, --port PORT           Specify port
+                          (default: )
+-P, --pid FILE            save PID in FILE when using -d option.
+                          (default: /var/run/scheduler.pid)
+-d, --daemon              Daemonize mode
+-l, --log FILE            Logfile for output
+-k, --kill [PORT]         Kill specified running daemons - leave
+</code></pre>
+
+<p>blank to kill all.</p>
+
+<pre><code>-u, --user USER           User to run as
+-G, --group GROUP         Group to run as
+-?, --help                Display this usage information.
+</code></pre>
+
+<p>```</p>
+
+<p>You can define the PID, the log file, the user and group launching this
+daemon (if launched in root). The only argument which is not essential to me is
+the PORT. But this gem was created to launch rack applications. So
+it's really needed in this case.</p>
+
+<p>An other great feature is the option extension. You can add some new
+options. Dante manage to you all options pass on your script.</p>
+
+<p>To use it, it's really simple. You just put <code>Dante.run</code> and put your
+code in a block. :</p>
+
+<p><code>ruby
+Dante.run('myapp') do |opts|
+  myapp.run
+end
+</code></p>
+
+<p>I am really impressed by this gem by the <a href="http://gomiso.com">gomiso</a>
+company. Thanks for creating such a good gem.</p>
+
+<p><a href="http://blog.shingara.fr/dante-pour-mettre-du-daemon-dans-son-code.html">Traduction Française</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Quiet assets help you to have little log]]></title>
+    <link href="http://blog-en.shingara.fr//quiet-assets-help-you-to-have-little-log.html"/>
+    <updated>2012-04-26T09:39:00+02:00</updated>
+    <id>http://blog-en.shingara.fr//quiet-assets-help-you-to-have-little-log</id>
+    <content type="html"><![CDATA[<p>One week ago, I discover a new gem really helpfull, <a href="https://github.com/evrone/quiet_assets">quiet_assets</a>.</p>
+
+<p>This gem is not a big deal, but it help a lot when you develop a Rails
+application ( > 3.1 ) with 'assets_pipeline'. If you have a lot of
+assets you have already see in your log a lot of information about
+requests doing on this assets. You can see log like :</p>
+
+<p><code>
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-02-13 13:24:04 +0400
+Served asset /application.js - 304 Not Modified (8ms)
+</code></p>
+
+<p>After, when you want see the log really interresting about the request
+you do, you need up on your log. It's really annoying. Our log file is
+really bloat by this logs.</p>
+
+<p>But <a href="https://github.com/evrone/quiet_assets">quiet_assets</a> is here to
+help you in this mess. After adding this gem in your Gemfile.</p>
+
+<p><code>
+gem 'quiet_assets', :group =&gt; :development
+</code></p>
+
+<p>You can discover your log clean and light like before assets_pipeline. No more logs about your assets
+request. Just your log you really need.</p>
+
+<p>Some gem can really be usefull even if it's little.</p>
+
+<p>Since rails 3.2.0, there are an option to define the logger of
+Sprockets. All informations is on this <a href="https://github.com/rails/rails/issues/2639">issue 2639</a>.
+But quiet_assets is allways usefull. When you define your sprocket's log to
+false you have allways logs from actionpack. You have less log, but
+allways too much.</p>
+
+<p><a href="http://blog.shingara.fr/quiet-assets-le-limiteur-de-log.html">French Translation</a></p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: daemon | Shiny happy people coding]]></title>
+  <link href="http://blog-en.shingara.fr//blog/categories/daemon/atom.xml" rel="self"/>
+  <link href="http://blog-en.shingara.fr//"/>
+  <updated>2012-07-12T09:34:41+02:00</updated>
+  <id>http://blog-en.shingara.fr//</id>
+  <author>
+    <name><![CDATA[Cyril Mougel]]></name>
+    <email><![CDATA[cyril.mougel@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Dante lets you put some daemon in your code]]></title>
+    <link href="http://blog-en.shingara.fr//dante-lets-you-put-some-daemon-in-your-code.html"/>
+    <updated>2012-05-11T09:54:00+02:00</updated>
+    <id>http://blog-en.shingara.fr//dante-lets-you-put-some-daemon-in-your-code</id>
+    <content type="html"><![CDATA[<p>Few days ago, I needed to convert a ruby script into daemon.</p>
+
+<p>In my deployment toolkit, I use monitrc to monitor my scripts. Monit
+checks a pidfile to know if the process is running or not.</p>
+
+<p>So, I looked the best ruby solution to easily to transform this script in deamon
+generating its own pidfile.</p>
+
+<p>The most popular project in ruby to convert a ruby script into daemon is
+<a href="http://daemons.rubyforge.org/">daemons</a>. I've tried several times in the past
+and never became fan. It's too complicated and doesn't generate pidfile.
+You have to manage everything yourself.</p>
+
+<p>The second big project about managing daemon in the ruby community is
+<a href="https://github.com/kennethkalmer/daemon-kit">daemon-kit</a>. I've tried it
+several times without success. To me, it's way too big and not
+flexible enough to use on a simple daemon script.</p>
+
+<p>Therefore, I decided to see if the ruby community had a new
+gem for this purpose. I discovered <a href="https://github.com/bazaarlabs/dante">dante</a>.
+This project was exactly what I really needed. It really gets the job done.</p>
+
+<p>By default, Dante manages few options in commandline. These options
+are all what you really need. No more useless stuff.</p>
+
+<p>Default options available :</p>
+
+<p>```</p>
+
+<pre><code>-p, --port PORT           Specify port
+                          (default: )
+-P, --pid FILE            save PID in FILE when using -d option.
+                          (default: /var/run/scheduler.pid)
+-d, --daemon              Daemonize mode
+-l, --log FILE            Logfile for output
+-k, --kill [PORT]         Kill specified running daemons - leave
+</code></pre>
+
+<p>blank to kill all.</p>
+
+<pre><code>-u, --user USER           User to run as
+-G, --group GROUP         Group to run as
+-?, --help                Display this usage information.
+</code></pre>
+
+<p>```</p>
+
+<p>You can define the PID, the log file, the user and group launching this
+daemon (if launched in root). The only argument which is not essential to me is
+the PORT. But this gem was created to launch rack applications. So
+it's really needed in this case.</p>
+
+<p>An other great feature is the option extension. You can add some new
+options. Dante manage to you all options pass on your script.</p>
+
+<p>To use it, it's really simple. You just put <code>Dante.run</code> and put your
+code in a block. :</p>
+
+<p><code>ruby
+Dante.run('myapp') do |opts|
+  myapp.run
+end
+</code></p>
+
+<p>I am really impressed by this gem by the <a href="http://gomiso.com">gomiso</a>
+company. Thanks for creating such a good gem.</p>
+
+<p><a href="http://blog.shingara.fr/dante-pour-mettre-du-daemon-dans-son-code.html">Traduction Française</a></p>
+]]></content>
+  </entry>
+  
+</feed>

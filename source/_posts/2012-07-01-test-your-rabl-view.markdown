@@ -90,3 +90,5 @@ the first params. If you have some other object you want use, you can't.
 I start a [Pull Request](https://github.com/nesquena/rabl/pull/261) to
 pass this variables in a `:locals` options. You can
 [follow it on github](https://github.com/nesquena/rabl/pull/261)
+
+[Traduction Française](http://blog.shingara.fr/tester-ses-vues-rabl.html)

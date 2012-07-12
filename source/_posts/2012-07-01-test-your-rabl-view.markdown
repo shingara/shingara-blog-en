@@ -87,8 +87,8 @@ controller stuff needed.
 But, I found a little limitation in this method. You can't pass some
 locals variables. So you can only test this render with value pass on
 the first params. If you have some other object you want use, you can't.
-I start a [Pull Request](https://github.com/nesquena/rabl/pull/261) to
+I start a [Pull Request](https://github.com/nesquena/rabl/pull/269) to
 pass this variables in a `:locals` options. You can
-[follow it on github](https://github.com/nesquena/rabl/pull/261)
+[follow it on github](https://github.com/nesquena/rabl/pull/269)
 
 [Traduction Française](http://blog.shingara.fr/tester-ses-vues-rabl.html)

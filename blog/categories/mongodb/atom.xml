@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mongodb | Shiny happy people coding]]></title>
   <link href="http://blog-en.shingara.fr//blog/categories/mongodb/atom.xml" rel="self"/>
   <link href="http://blog-en.shingara.fr//"/>
-  <updated>2012-07-12T09:58:32+02:00</updated>
+  <updated>2013-05-29T18:35:27+02:00</updated>
   <id>http://blog-en.shingara.fr//</id>
   <author>
     <name><![CDATA[Cyril Mougel]]></name>
@@ -30,9 +30,9 @@ The team proposed to change the internal software design on MongoDB Ruby driver 
 
 <h2>Thread-safe</h2>
 
-<p>One of this gem's goals was to have a more thread-safe gem than the official MongoDB ruby driver.
+<p>One of this gem&rsquo;s goals was to have a more thread-safe gem than the official MongoDB ruby driver.
 This official gem is sometimes considered like not 100% thread-safe like reported <a href="https://github.com/mperham/sidekiq/wiki/Problems-and-Troubleshooting">Mike Perham</a>.
-Since the ruby community discovered again the thread, it hasn't stopped of being a real problem.
+Since the ruby community discovered again the thread, it hasn&rsquo;t stopped of being a real problem.
 With Moped we can use <a href="http://mperham.github.com/sidekiq/">sidekiq</a>.</p>
 
 <h2>No more extension</h2>
@@ -41,11 +41,11 @@ With Moped we can use <a href="http://mperham.github.com/sidekiq/">sidekiq</a>.<
 gem <a href="http://rubygems.org/gems/bson_ext">bson_ext</a>.
 Without it, you will have some performance penalties.
 As this gem is a C extension, this gem has 2 versions in order to be compatible with JRuby.
-One in C and the other in Java. It's therefore harder to maintain.</p>
+One in C and the other in Java. It&rsquo;s therefore harder to maintain.</p>
 
 <p>With Moped, no more extension needed.
 Everything is done in pure ruby.
-A benchmark shows that this moped's bson version is even faster than the C extension.</p>
+A benchmark shows that this moped&rsquo;s bson version is even faster than the C extension.</p>
 
 <p>The only case where moped is slower than bson_ext is the ObjectId generation, like reported on <a href="https://groups.google.com/d/topic/mongoid/87IdIKO8-VM/discussion">Mongoid mailing-list</a>.
 But, after all, Moped is new.
@@ -55,7 +55,7 @@ It can be improved in the future.</p>
 
 <p>The Moped API is really clean and simple.
 It depends on the developers using it.
-But, to me, it's a good API because it's really more "ruby way".</p>
+But, to me, it&rsquo;s a good API because it&rsquo;s really more &ldquo;ruby way&rdquo;.</p>
 
 <h2>Better Replicat Set management</h2>
 

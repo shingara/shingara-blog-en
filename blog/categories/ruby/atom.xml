@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ruby | Shiny happy people coding]]></title>
   <link href="http://blog-en.shingara.fr//blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://blog-en.shingara.fr//"/>
-  <updated>2012-07-12T09:58:32+02:00</updated>
+  <updated>2013-05-29T18:35:27+02:00</updated>
   <id>http://blog-en.shingara.fr//</id>
   <author>
     <name><![CDATA[Cyril Mougel]]></name>
@@ -27,13 +27,13 @@ checks a pidfile to know if the process is running or not.</p>
 generating its own pidfile.</p>
 
 <p>The most popular project in ruby to convert a ruby script into daemon is
-<a href="http://daemons.rubyforge.org/">daemons</a>. I've tried several times in the past
-and never became fan. It's too complicated and doesn't generate pidfile.
+<a href="http://daemons.rubyforge.org/">daemons</a>. I&rsquo;ve tried several times in the past
+and never became fan. It&rsquo;s too complicated and doesn&rsquo;t generate pidfile.
 You have to manage everything yourself.</p>
 
 <p>The second big project about managing daemon in the ruby community is
-<a href="https://github.com/kennethkalmer/daemon-kit">daemon-kit</a>. I've tried it
-several times without success. To me, it's way too big and not
+<a href="https://github.com/kennethkalmer/daemon-kit">daemon-kit</a>. I&rsquo;ve tried it
+several times without success. To me, it&rsquo;s way too big and not
 flexible enough to use on a simple daemon script.</p>
 
 <p>Therefore, I decided to see if the ruby community had a new
@@ -68,12 +68,12 @@ are all what you really need. No more useless stuff.</p>
 <p>You can define the PID, the log file, the user and group launching this
 daemon (if launched in root). The only argument which is not essential to me is
 the PORT. But this gem was created to launch rack applications. So
-it's really needed in this case.</p>
+it&rsquo;s really needed in this case.</p>
 
 <p>An other great feature is the option extension. You can add some new
 options. Dante manage to you all options pass on your script.</p>
 
-<p>To use it, it's really simple. You just put <code>Dante.run</code> and put your
+<p>To use it, it&rsquo;s really simple. You just put <code>Dante.run</code> and put your
 code in a block. :</p>
 
 <p><code>ruby
@@ -106,9 +106,9 @@ The team proposed to change the internal software design on MongoDB Ruby driver 
 
 <h2>Thread-safe</h2>
 
-<p>One of this gem's goals was to have a more thread-safe gem than the official MongoDB ruby driver.
+<p>One of this gem&rsquo;s goals was to have a more thread-safe gem than the official MongoDB ruby driver.
 This official gem is sometimes considered like not 100% thread-safe like reported <a href="https://github.com/mperham/sidekiq/wiki/Problems-and-Troubleshooting">Mike Perham</a>.
-Since the ruby community discovered again the thread, it hasn't stopped of being a real problem.
+Since the ruby community discovered again the thread, it hasn&rsquo;t stopped of being a real problem.
 With Moped we can use <a href="http://mperham.github.com/sidekiq/">sidekiq</a>.</p>
 
 <h2>No more extension</h2>
@@ -117,11 +117,11 @@ With Moped we can use <a href="http://mperham.github.com/sidekiq/">sidekiq</a>.<
 gem <a href="http://rubygems.org/gems/bson_ext">bson_ext</a>.
 Without it, you will have some performance penalties.
 As this gem is a C extension, this gem has 2 versions in order to be compatible with JRuby.
-One in C and the other in Java. It's therefore harder to maintain.</p>
+One in C and the other in Java. It&rsquo;s therefore harder to maintain.</p>
 
 <p>With Moped, no more extension needed.
 Everything is done in pure ruby.
-A benchmark shows that this moped's bson version is even faster than the C extension.</p>
+A benchmark shows that this moped&rsquo;s bson version is even faster than the C extension.</p>
 
 <p>The only case where moped is slower than bson_ext is the ObjectId generation, like reported on <a href="https://groups.google.com/d/topic/mongoid/87IdIKO8-VM/discussion">Mongoid mailing-list</a>.
 But, after all, Moped is new.
@@ -131,7 +131,7 @@ It can be improved in the future.</p>
 
 <p>The Moped API is really clean and simple.
 It depends on the developers using it.
-But, to me, it's a good API because it's really more "ruby way".</p>
+But, to me, it&rsquo;s a good API because it&rsquo;s really more &ldquo;ruby way&rdquo;.</p>
 
 <h2>Better Replicat Set management</h2>
 

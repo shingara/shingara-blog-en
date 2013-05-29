@@ -4,7 +4,7 @@
   <title><![CDATA[Category: gem | Shiny happy people coding]]></title>
   <link href="http://blog-en.shingara.fr//blog/categories/gem/atom.xml" rel="self"/>
   <link href="http://blog-en.shingara.fr//"/>
-  <updated>2012-07-12T09:58:32+02:00</updated>
+  <updated>2013-05-29T18:35:27+02:00</updated>
   <id>http://blog-en.shingara.fr//</id>
   <author>
     <name><![CDATA[Cyril Mougel]]></name>
@@ -27,13 +27,13 @@ checks a pidfile to know if the process is running or not.</p>
 generating its own pidfile.</p>
 
 <p>The most popular project in ruby to convert a ruby script into daemon is
-<a href="http://daemons.rubyforge.org/">daemons</a>. I've tried several times in the past
-and never became fan. It's too complicated and doesn't generate pidfile.
+<a href="http://daemons.rubyforge.org/">daemons</a>. I&rsquo;ve tried several times in the past
+and never became fan. It&rsquo;s too complicated and doesn&rsquo;t generate pidfile.
 You have to manage everything yourself.</p>
 
 <p>The second big project about managing daemon in the ruby community is
-<a href="https://github.com/kennethkalmer/daemon-kit">daemon-kit</a>. I've tried it
-several times without success. To me, it's way too big and not
+<a href="https://github.com/kennethkalmer/daemon-kit">daemon-kit</a>. I&rsquo;ve tried it
+several times without success. To me, it&rsquo;s way too big and not
 flexible enough to use on a simple daemon script.</p>
 
 <p>Therefore, I decided to see if the ruby community had a new
@@ -68,12 +68,12 @@ are all what you really need. No more useless stuff.</p>
 <p>You can define the PID, the log file, the user and group launching this
 daemon (if launched in root). The only argument which is not essential to me is
 the PORT. But this gem was created to launch rack applications. So
-it's really needed in this case.</p>
+it&rsquo;s really needed in this case.</p>
 
 <p>An other great feature is the option extension. You can add some new
 options. Dante manage to you all options pass on your script.</p>
 
-<p>To use it, it's really simple. You just put <code>Dante.run</code> and put your
+<p>To use it, it&rsquo;s really simple. You just put <code>Dante.run</code> and put your
 code in a block. :</p>
 
 <p><code>ruby
@@ -97,7 +97,7 @@ company. Thanks for creating such a good gem.</p>
     <content type="html"><![CDATA[<p>One week ago, I discover a new gem really helpfull, <a href="https://github.com/evrone/quiet_assets">quiet_assets</a>.</p>
 
 <p>This gem is not a big deal, but it help a lot when you develop a Rails
-application ( > 3.1 ) with 'assets_pipeline'. If you have a lot of
+application ( > 3.1 ) with &lsquo;assets_pipeline&rsquo;. If you have a lot of
 assets you have already see in your log a lot of information about
 requests doing on this assets. You can see log like :</p>
 
@@ -107,7 +107,7 @@ Served asset /application.js - 304 Not Modified (8ms)
 </code></p>
 
 <p>After, when you want see the log really interresting about the request
-you do, you need up on your log. It's really annoying. Our log file is
+you do, you need up on your log. It&rsquo;s really annoying. Our log file is
 really bloat by this logs.</p>
 
 <p>But <a href="https://github.com/evrone/quiet_assets">quiet_assets</a> is here to
@@ -120,11 +120,11 @@ gem 'quiet_assets', :group =&gt; :development
 <p>You can discover your log clean and light like before assets_pipeline. No more logs about your assets
 request. Just your log you really need.</p>
 
-<p>Some gem can really be usefull even if it's little.</p>
+<p>Some gem can really be usefull even if it&rsquo;s little.</p>
 
 <p>Since rails 3.2.0, there are an option to define the logger of
 Sprockets. All informations is on this <a href="https://github.com/rails/rails/issues/2639">issue 2639</a>.
-But quiet_assets is allways usefull. When you define your sprocket's log to
+But quiet_assets is allways usefull. When you define your sprocket&rsquo;s log to
 false you have allways logs from actionpack. You have less log, but
 allways too much.</p>
 

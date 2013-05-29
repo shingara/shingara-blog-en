@@ -4,7 +4,7 @@
   <title><![CDATA[Category: rails | Shiny happy people coding]]></title>
   <link href="http://blog-en.shingara.fr//blog/categories/rails/atom.xml" rel="self"/>
   <link href="http://blog-en.shingara.fr//"/>
-  <updated>2012-07-12T09:58:32+02:00</updated>
+  <updated>2013-05-29T18:35:27+02:00</updated>
   <id>http://blog-en.shingara.fr//</id>
   <author>
     <name><![CDATA[Cyril Mougel]]></name>
@@ -21,7 +21,7 @@
     <content type="html"><![CDATA[<p>One week ago, I discover a new gem really helpfull, <a href="https://github.com/evrone/quiet_assets">quiet_assets</a>.</p>
 
 <p>This gem is not a big deal, but it help a lot when you develop a Rails
-application ( > 3.1 ) with 'assets_pipeline'. If you have a lot of
+application ( > 3.1 ) with &lsquo;assets_pipeline&rsquo;. If you have a lot of
 assets you have already see in your log a lot of information about
 requests doing on this assets. You can see log like :</p>
 
@@ -31,7 +31,7 @@ Served asset /application.js - 304 Not Modified (8ms)
 </code></p>
 
 <p>After, when you want see the log really interresting about the request
-you do, you need up on your log. It's really annoying. Our log file is
+you do, you need up on your log. It&rsquo;s really annoying. Our log file is
 really bloat by this logs.</p>
 
 <p>But <a href="https://github.com/evrone/quiet_assets">quiet_assets</a> is here to
@@ -44,11 +44,11 @@ gem 'quiet_assets', :group =&gt; :development
 <p>You can discover your log clean and light like before assets_pipeline. No more logs about your assets
 request. Just your log you really need.</p>
 
-<p>Some gem can really be usefull even if it's little.</p>
+<p>Some gem can really be usefull even if it&rsquo;s little.</p>
 
 <p>Since rails 3.2.0, there are an option to define the logger of
 Sprockets. All informations is on this <a href="https://github.com/rails/rails/issues/2639">issue 2639</a>.
-But quiet_assets is allways usefull. When you define your sprocket's log to
+But quiet_assets is allways usefull. When you define your sprocket&rsquo;s log to
 false you have allways logs from actionpack. You have less log, but
 allways too much.</p>
 

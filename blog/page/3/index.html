@@ -9,7 +9,7 @@
   <meta name="author" content="Cyril Mougel">
 
   
-  <meta name="description" content="Since 1 month, a new release of Pictrails is out. There are no big modification neither big new feature. Only two features added. They come after &hellip;">
+  <meta name="description" content="With Merb-mailer, merb offer a system to send email. But merb is a web framework ORM agnostic. So merb-mailer is like a controller, not a model like &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -76,6 +76,67 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/send-email-with-merb-mailer-in-datamapper-model.html">Send Email With Merb-mailer in Datamapper Model</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-12-20T00:00:00+01:00" pubdate data-updated="true">Dec 20<span>th</span>, 2008</time>
+        
+         | <a href="/send-email-with-merb-mailer-in-datamapper-model.html#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content">  <p>With Merb-mailer, merb offer a system to send email. But merb is a web framework ORM agnostic. So merb-mailer is like a controller, not a model like in Rails. So the send_mail method is available only in controller. But how use this method in our Datamapper model? It&#8217;s really simple because Merb use the good way in Ruby and help to use that.</p>
+
+  <p>After a short research in code of merb-mailer. I look that the send_mail method is in Mixin. After include this mixin in your class, you can use the send_mail method.</p>
+
+  <typo:code lang="ruby">
+  class Member
+    include DataMapper::Resource
+    include Merb::MailerMixin
+
+    property :id, Serial
+    property :name, String
+
+    def register
+      // some code
+      send_mail (UserMailer, :register, {
+                :from => &#8220;no-reply@example.com&#8221;,
+                :to => person.email,
+                :subject => &#8220;Please activate your account&#8221; 
+               }   
+    end 
+  end 
+  </typo:code>
+
+  <p><a href="http://blog.shingara.fr/envoyer-un-email-dans-un-model-datamapper">Traduction française</a></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -420,6 +481,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/errbit-0-dot-1-0.html">Errbit 0.1.0</a>
+      </li>
+    
+      <li class="post">
         <a href="/test-your-rabl-view.html">Test your Rabl&#8217;s view</a>
       </li>
     
@@ -433,10 +498,6 @@
     
       <li class="post">
         <a href="/moped-the-new-mongodb-ruby-driver.html">Moped the new mongoDB ruby driver</a>
-      </li>
-    
-      <li class="post">
-        <a href="/quiet-assets-help-you-to-have-little-log.html">Quiet assets help you to have little log</a>
       </li>
     
   </ul>
@@ -489,13 +550,24 @@
 </section>
 
 
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/Cyril Mougel?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
   
 </aside>
 
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2012 - Cyril Mougel -
+  Copyright &copy; 2013 - Cyril Mougel -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

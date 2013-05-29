@@ -5,11 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>about - Shiny happy people coding</title>
+  <title>Errbit 0.1.0 - Shiny happy people coding</title>
   <meta name="author" content="Cyril Mougel">
 
   
-  <meta name="description" content="Who Am I? This is the Cyril Mougel's blog. I spoke about my developments experiences. That can be some bugs, or new stuff. What about I speak ? The &hellip;">
+  <meta name="description" content="Errbit was release for the first
+time in August 24 2010 by Jared Pace. Since this 3 years, errbit is not dead and it&rsquo;s really maintain and used &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog-en.shingara.fr//.html">
+  <link rel="canonical" href="http://blog-en.shingara.fr//errbit-0-dot-1-0.html">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -79,7 +80,7 @@
   
   <header>
     
-      <h1 class="entry-title">About</h1>
+      <h1 class="entry-title">Errbit 0.1.0</h1>
     
     
       <p class="meta">
@@ -95,7 +96,7 @@
   
 
 
-<time datetime="2010-03-29T00:00:00+02:00" pubdate data-updated="true">Mar 29<span>th</span>, 2010</time>
+<time datetime="2013-05-29T18:04:00+02:00" pubdate data-updated="true">May 29<span>th</span>, 2013</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -104,19 +105,62 @@
   </header>
 
 
-<div class="entry-content"><h1>Who Am I?</h1>
+<div class="entry-content"><p>Errbit was <a href="http://thinkrelevance.com/blog/2010/08/24/introducing-errbit">release for the first
+time</a> in August 24 2010 by Jared Pace.</p>
 
-<p>This is the Cyril Mougel's blog. I spoke about my developments experiences. That can be some bugs, or new stuff.</p>
+<p>Since this 3 years, errbit is not dead and it&rsquo;s really maintain and used.
+Now, I am proud to release this new
+errbit. There was not real release from the start, but I think it&rsquo;s
+needed. I do this first one with 0.1.0. Errbit do a lot of thing but can
+do better. I hope try to do this challenge with the Errbit Team and try
+to release more often this application.</p>
 
-<h1>What about I speak ?</h1>
+<p>A Changelog is now available to see what change in your favorite error
+catcher application. I have not list all thing errbit can do, but I list
+some new improvement in last couple of month. You can find it on <a href="https://github.com/errbit/errbit/blob/master/CHANGELOG.md">github</a></p>
 
-<p>The blog's main line is mainly the framework <a href="http://rubyonrails.org">Ruby on Rails</a>, but also all around the <a href="http://ruby-lang.org">Ruby lang</a>.</p>
+<p>If you want download this version you can do by github : <a href="https://github.com/errbit/errbit/archive/v0.1.0.zip">https://github.com/errbit/errbit/archive/v0.1.0.zip</a></p>
 
-<p>Voici le blog de Cyril Mougel. Ici, j'y parle de mes expériences de développement. Que ca soit des bugs, rencontrés des nouveautés ou des améliorations apportés.</p>
+<h2>0.1.0 &ndash; 2013-05-29</h2>
 
-<h1>My experience</h1>
+<h3>Improvements</h3>
 
-<p>After 1 year in CapGemini where I code on J2EE, I am now a Ruby on Rails developer since 2008 in several companies.</p>
+<ul>
+<li><a href="https://github.com/errbit/errbit/issues/474">#474</a> Improve message when access denied. (<a href="https://github.com/chadcf">@chadcf</a>)</li>
+<li><a href="https://github.com/errbit/errbit/issues/468">#468</a> Launch a repairDatabase in MongoDB database after launching
+the clear_resolved task. (<a href="https://github.com/shingara">@shingara</a>)</li>
+<li>Update gem of Mongoid to 2.7.1</li>
+<li>Update gem of Mongo to 1.8.5</li>
+<li><a href="https://github.com/errbit/errbit/issues/457">#457</a> Add task information about db:seed in Readme. (<a href="https://github.com/mildavw">@mildavw</a>)</li>
+<li>Add support of Ruby 2.0.0</li>
+<li><a href="https://github.com/errbit/errbit/issues/475">#475</a> Return a HTTP 422 status code when you try push notice with
+bad api key. (<a href="https://github.com/shingara">@shingara</a>)</li>
+<li>Return a 400 http status when you try put a notice without args.
+(<a href="https://github.com/shingara">@shingara</a>)</li>
+<li><a href="https://github.com/errbit/errbit/issues/486">#486</a> Add confirms box when you do massive action. (<a href="https://github.com/manuelmeurer">@manuelmeurer</a>)</li>
+<li><a href="https://github.com/errbit/errbit/issues/487">#487</a> Add specific template to redmine notification with less useless data. (<a href="https://github.com/tvdeyen">@tvdeyen</a>)</li>
+</ul>
+
+
+<h3>Bug fixes</h3>
+
+<ul>
+<li><a href="https://github.com/errbit/errbit/issues/469">#469</a> Fix issue about the documentation of new heroku addons usage.
+(<a href="https://github.com/adamjt">@adamjt</a>)</li>
+<li><a href="https://github.com/errbit/errbit/issues/455">#455</a> Avoid raising exception if you comment an exception and no
+other user are define to received this comment. (<a href="https://github.com/alvarobp">@alvarobp</a>)</li>
+<li><a href="https://github.com/errbit/errbit/issues/453">#453</a> Fix ruby 2.0.0 incompatibilities with gem (<a href="https://github.com/SamSaffron">@SamSaffron</a>)</li>
+<li><a href="https://github.com/errbit/errbit/issues/476">#476</a> Fix javascript notifier issue with IE8 (<a href="https://github.com/sdepold">@sdepold</a>)</li>
+<li><a href="https://github.com/errbit/errbit/issues/466">#466</a> Fix not see problem if octokit gem not define (<a href="https://github.com/tamaloa">@tamaloa</a>)</li>
+<li><a href="https://github.com/errbit/errbit/issues/460">#460</a> Fix issue when you try see user with gravatar activate but no
+email define to this user (<a href="https://github.com/ivanyv">@ivanyv</a>)</li>
+<li><a href="https://github.com/errbit/errbit/issues/478">#478</a> Fix issue about calculation of statisque of problem after
+merge (<a href="https://github.com/shingara">@shingara</a>)</li>
+</ul>
+
+
+<!--- The following link definition list is generated by PimpMyChangelog --->
+
 </div>
 
 
@@ -139,15 +183,21 @@
   
 
 
-<time datetime="2010-03-29T00:00:00+02:00" pubdate data-updated="true">Mar 29<span>th</span>, 2010</time>
+<time datetime="2013-05-29T18:04:00+02:00" pubdate data-updated="true">May 29<span>th</span>, 2013</time>
       
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/errbit/'>errbit</a>, <a class='category' href='/blog/categories/error/'>error</a>, <a class='category' href='/blog/categories/release/'>release</a>
+  
+</span>
 
 
     </p>
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog-en.shingara.fr//.html" data-via="shingara" data-counturl="http://blog-en.shingara.fr//.html" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://blog-en.shingara.fr//errbit-0-dot-1-0.html" data-via="shingara" data-counturl="http://blog-en.shingara.fr//errbit-0-dot-1-0.html" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -160,14 +210,18 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/oupsnow-0-5-0-released.html" title="Previous Post: Oupsnow 0.5.0 released">&laquo; Oupsnow 0.5.0 released</a>
+        <a class="basic-alignment left" href="/test-your-rabl-view.html" title="Previous Post: Test your Rabl's view">&laquo; Test your Rabl's view</a>
       
-      
-        <a class="basic-alignment right" href="/eventmachines-periodictimer-the-simply-cron.html" title="Next Post: EventMachine's PeriodicTimer the simply cron">EventMachine's PeriodicTimer the simply cron &raquo;</a>
       
     </p>
   </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -276,7 +330,10 @@
       var disqus_shortname = 'blog-en-shingara';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog-en.shingara.fr//errbit-0-dot-1-0.html';
+        var disqus_url = 'http://blog-en.shingara.fr//errbit-0-dot-1-0.html';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

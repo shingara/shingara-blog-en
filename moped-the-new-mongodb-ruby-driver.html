@@ -118,9 +118,9 @@ The team proposed to change the internal software design on MongoDB Ruby driver 
 
 <h2>Thread-safe</h2>
 
-<p>One of this gem&#8217;s goals was to have a more thread-safe gem than the official MongoDB ruby driver.
+<p>One of this gem&rsquo;s goals was to have a more thread-safe gem than the official MongoDB ruby driver.
 This official gem is sometimes considered like not 100% thread-safe like reported <a href="https://github.com/mperham/sidekiq/wiki/Problems-and-Troubleshooting">Mike Perham</a>.
-Since the ruby community discovered again the thread, it hasn&#8217;t stopped of being a real problem.
+Since the ruby community discovered again the thread, it hasn&rsquo;t stopped of being a real problem.
 With Moped we can use <a href="http://mperham.github.com/sidekiq/">sidekiq</a>.</p>
 
 <h2>No more extension</h2>
@@ -129,11 +129,11 @@ With Moped we can use <a href="http://mperham.github.com/sidekiq/">sidekiq</a>.<
 gem <a href="http://rubygems.org/gems/bson_ext">bson_ext</a>.
 Without it, you will have some performance penalties.
 As this gem is a C extension, this gem has 2 versions in order to be compatible with JRuby.
-One in C and the other in Java. It&#8217;s therefore harder to maintain.</p>
+One in C and the other in Java. It&rsquo;s therefore harder to maintain.</p>
 
 <p>With Moped, no more extension needed.
 Everything is done in pure ruby.
-A benchmark shows that this moped&#8217;s bson version is even faster than the C extension.</p>
+A benchmark shows that this moped&rsquo;s bson version is even faster than the C extension.</p>
 
 <p>The only case where moped is slower than bson_ext is the ObjectId generation, like reported on <a href="https://groups.google.com/d/topic/mongoid/87IdIKO8-VM/discussion">Mongoid mailing-list</a>.
 But, after all, Moped is new.
@@ -143,7 +143,7 @@ It can be improved in the future.</p>
 
 <p>The Moped API is really clean and simple.
 It depends on the developers using it.
-But, to me, it&#8217;s a good API because it&#8217;s really more &#8220;ruby way&#8221;.</p>
+But, to me, it&rsquo;s a good API because it&rsquo;s really more &ldquo;ruby way&rdquo;.</p>
 
 <h2>Better Replicat Set management</h2>
 
@@ -259,6 +259,10 @@ If you want to test it, you will need to use the Master branch on Mongoid.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/errbit-0-dot-1-0.html">Errbit 0.1.0</a>
+      </li>
+    
+      <li class="post">
         <a href="/test-your-rabl-view.html">Test your Rabl's view</a>
       </li>
     
@@ -272,10 +276,6 @@ If you want to test it, you will need to use the Master branch on Mongoid.</p>
     
       <li class="post">
         <a href="/moped-the-new-mongodb-ruby-driver.html">Moped the new mongoDB ruby driver</a>
-      </li>
-    
-      <li class="post">
-        <a href="/quiet-assets-help-you-to-have-little-log.html">Quiet assets help you to have little log</a>
       </li>
     
   </ul>
@@ -328,6 +328,17 @@ If you want to test it, you will need to use the Master branch on Mongoid.</p>
 </section>
 
 
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/Cyril Mougel?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
   
 </aside>
 
@@ -335,7 +346,7 @@ If you want to test it, you will need to use the Master branch on Mongoid.</p>
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2012 - Cyril Mougel -
+  Copyright &copy; 2013 - Cyril Mougel -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

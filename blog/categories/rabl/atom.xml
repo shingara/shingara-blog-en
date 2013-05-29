@@ -4,7 +4,7 @@
   <title><![CDATA[Category: rabl | Shiny happy people coding]]></title>
   <link href="http://blog-en.shingara.fr//blog/categories/rabl/atom.xml" rel="self"/>
   <link href="http://blog-en.shingara.fr//"/>
-  <updated>2012-07-12T09:58:32+02:00</updated>
+  <updated>2013-05-29T18:35:27+02:00</updated>
   <id>http://blog-en.shingara.fr//</id>
   <author>
     <name><![CDATA[Cyril Mougel]]></name>
@@ -28,12 +28,12 @@ way depending of where is represent.</p>
 <h1>Rabl simply clean</h1>
 
 <p>To manage your JSON and XML view, the most common gem is <code>JBuilder</code> and
-<code>XmlBuilder</code>, both are created by DHH. To me it's not a good DSL and can
+<code>XmlBuilder</code>, both are created by DHH. To me it&rsquo;s not a good DSL and can
 be a little too verbose. Rabl has a clean a simplest DSL and you just
 need one view to generate XML and JSON. You can even generate some other
 output with Rabl.</p>
 
-<p>A little example of Rabl's view :</p>
+<p>A little example of Rabl&rsquo;s view :</p>
 
 <p><code>ruby
 object @post
@@ -43,7 +43,7 @@ child(:author) do
 end
 </code></p>
 
-<h1>Test your Rabl's view</h1>
+<h1>Test your Rabl&rsquo;s view</h1>
 
 <p>To test the output of this view, you have multiple choice. You can
 generate this view in an integration test and test this output. You can
@@ -52,16 +52,16 @@ your view test. With this last choice, you can define what you really
 put on your view and test only your rabl representation. In this case
 you can have a flexible and fast test.</p>
 
-<p>Since Rabl 0.6.0, a new method help to generate your view directly. It's
+<p>Since Rabl 0.6.0, a new method help to generate your view directly. It&rsquo;s
 with this method you can simply test our view.</p>
 
 <p>An example of how we can test our view (
 <code>spec/views/posts/show_rabl_spec.rb</code>) :</p>
 
 <p>```ruby
-require 'spec_helper'</p>
+require &lsquo;spec_helper&rsquo;</p>
 
-<p>describe "blogs/show.rabl" do</p>
+<p>describe &ldquo;blogs/show.rabl&rdquo; do</p>
 
 <pre><code>let(:auhor) { Author.new(:firstname =&gt; 'Cyril', :lastname =&gt; 'Mougel') }
 let(:blog) { Blog.new(:content =&gt; 'hello', :author =&gt; author) }
@@ -95,9 +95,9 @@ end
 test is fast because no need doing some database request and no
 controller stuff needed.</p>
 
-<p>But, I found a little limitation in this method. You can't pass some
+<p>But, I found a little limitation in this method. You can&rsquo;t pass some
 locals variables. So you can only test this render with value pass on
-the first params. If you have some other object you want use, you can't.
+the first params. If you have some other object you want use, you can&rsquo;t.
 I start a <a href="https://github.com/nesquena/rabl/pull/269">Pull Request</a> to
 pass this variables in a <code>:locals</code> options. You can
 <a href="https://github.com/nesquena/rabl/pull/269">follow it on github</a></p>

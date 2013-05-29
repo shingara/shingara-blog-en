@@ -9,7 +9,7 @@
   <meta name="author" content="Cyril Mougel">
 
   
-  <meta name="description" content="EventMachine is one of the best Ruby libraries. But it&#8217;s also the most unknown and unused. I started to look at Event Machine and where I could &hellip;">
+  <meta name="description" content="EventMachine is one of the best Ruby libraries. But it&rsquo;s also the most unknown and unused. I started to look at Event Machine and where I could &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -104,7 +104,7 @@
   </header>
 
 
-<div class="entry-content"><p><a href="http://rubyeventmachine.com/">EventMachine</a> is one of the best Ruby libraries. But it&#8217;s also the most unknown and unused.</p>
+<div class="entry-content"><p><a href="http://rubyeventmachine.com/">EventMachine</a> is one of the best Ruby libraries. But it&rsquo;s also the most unknown and unused.</p>
 
 <p>I started to look at Event Machine and where I could use it. The first application I found was the <a href="http://eventmachine.rubyforge.org/EventMachine/PeriodicTimer.html">PeriodicTimer</a>.</p>
 
@@ -112,20 +112,20 @@
 
 <p>Let me explain : a cronjob is really a great tool. We can precisely define the time where task is executed. Usually, this task executes precisely at a given time… But when a task is executed too soon, using a cronjob can become awful.</p>
 
-<p>Cron doesn&#8217;t have any queue system, therefore there can be an increase of the number of tasks running at same time. Your server might become overloaded and in that case you&#8217;d have to restart it. This situation would happen only if your task is created to be executed more times than your frequency of execution.</p>
+<p>Cron doesn&rsquo;t have any queue system, therefore there can be an increase of the number of tasks running at same time. Your server might become overloaded and in that case you&rsquo;d have to restart it. This situation would happen only if your task is created to be executed more times than your frequency of execution.</p>
 
-<p>The solution can be to have a little application like <a href="http://forge.bearstech.com/trac/wiki/JobQueue">jobq</a> to manage your queue system. But in many cases you don&#8217;t really need a queue system, so it would be a little bit like overkill.</p>
+<p>The solution can be to have a little application like <a href="http://forge.bearstech.com/trac/wiki/JobQueue">jobq</a> to manage your queue system. But in many cases you don&rsquo;t really need a queue system, so it would be a little bit like overkill.</p>
 
-<p>The PeriodicTime&#8217;s advantage is to execute after a time define precisely. There is no management of time: only the elapse time needs to be managed. The task is sent after X seconds after the end of the previous task and when there are no tasks running anymore. There might be some little variations in the time the task will execute, but it&#8217;s not really a problem. The most important is that the task is executed regularly (e.g. when fetching statistics).</p>
+<p>The PeriodicTime&rsquo;s advantage is to execute after a time define precisely. There is no management of time: only the elapse time needs to be managed. The task is sent after X seconds after the end of the previous task and when there are no tasks running anymore. There might be some little variations in the time the task will execute, but it&rsquo;s not really a problem. The most important is that the task is executed regularly (e.g. when fetching statistics).</p>
 
-<p>Below is [a sample of code]http://gist.github.com/345000)  using PeriodicTimer.</p>
+<p>Below is [a sample of code]<a href="http://gist.github.com/345000">http://gist.github.com/345000</a>)  using PeriodicTimer.</p>
 
-<p>&lt;typo:code lang=&#8221;ruby&#8221;>
-require &#8216;eventmachine&#8217;
-require &#8216;timeout&#8217;
+<p>&lt;typo:code lang=&ldquo;ruby&rdquo;>
+require &lsquo;eventmachine&rsquo;
+require &lsquo;timeout&rsquo;
 EventMachine.run {
  EventMachine::PeriodicTimer.new(10) do
-   puts &#8220;#{Time.now} : I am 10&#8221;
+   puts &ldquo;#{Time.now} : I am 10&rdquo;
    sleep 10
  end</p>
 
@@ -137,7 +137,7 @@ EventMachine.run {
 
 <p>And the output is after 50 second of execution.</p>
 
-<p>&lt;typo:code lang=&#8221;plain&#8221;>
+<p>&lt;typo:code lang=&ldquo;plain&rdquo;>
 $ ruby em_periodic.rb
 Fri Mar 26 16:07:39 +0100 2010
 Fri Mar 26 16:07:40 +0100 2010
@@ -175,7 +175,7 @@ Fri Mar 26 16:08:28 +0100 2010 : I am 10
 
 <p>We can see that the task is executed each second. But the other task executing after 10 seconds, runs and locks the thread. So the first task (executing each second) is executed only after the end of second one. After that, each second the task restarts. and locks again after 10 seconds.</p>
 
-<p>This is really the great strength of PeriodicTimer. We can easily make a suite of tasks who will never execute at the same time. Lately I&#8217;m using this for all my scripts fetching data.</p>
+<p>This is really the great strength of PeriodicTimer. We can easily make a suite of tasks who will never execute at the same time. Lately I&rsquo;m using this for all my scripts fetching data.</p>
 </div>
 
 
@@ -237,6 +237,10 @@ Fri Mar 26 16:08:28 +0100 2010 : I am 10
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/errbit-0-dot-1-0.html">Errbit 0.1.0</a>
+      </li>
+    
+      <li class="post">
         <a href="/test-your-rabl-view.html">Test your Rabl's view</a>
       </li>
     
@@ -250,10 +254,6 @@ Fri Mar 26 16:08:28 +0100 2010 : I am 10
     
       <li class="post">
         <a href="/moped-the-new-mongodb-ruby-driver.html">Moped the new mongoDB ruby driver</a>
-      </li>
-    
-      <li class="post">
-        <a href="/quiet-assets-help-you-to-have-little-log.html">Quiet assets help you to have little log</a>
       </li>
     
   </ul>
@@ -306,6 +306,17 @@ Fri Mar 26 16:08:28 +0100 2010 : I am 10
 </section>
 
 
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/Cyril Mougel?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
   
 </aside>
 
@@ -313,7 +324,7 @@ Fri Mar 26 16:08:28 +0100 2010 : I am 10
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2012 - Cyril Mougel -
+  Copyright &copy; 2013 - Cyril Mougel -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

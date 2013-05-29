@@ -4,7 +4,7 @@
   <title><![CDATA[Category: editor | Shiny happy people coding]]></title>
   <link href="http://blog-en.shingara.fr//blog/categories/editor/atom.xml" rel="self"/>
   <link href="http://blog-en.shingara.fr//"/>
-  <updated>2012-07-12T09:58:32+02:00</updated>
+  <updated>2013-05-29T18:35:27+02:00</updated>
   <id>http://blog-en.shingara.fr//</id>
   <author>
     <name><![CDATA[Cyril Mougel]]></name>
@@ -19,12 +19,12 @@
     <updated>2012-05-31T09:48:00+02:00</updated>
     <id>http://blog-en.shingara.fr//vundle-the-bundler-of-vim</id>
     <content type="html"><![CDATA[<p>I use vim like text editor since my school. I allways appreciate vim and
-I really don't want change to another one.</p>
+I really don&rsquo;t want change to another one.</p>
 
 <h1>How I manage my plugin around the time</h1>
 
 <p>Vim is really powerfull with this plugins. You need really quick use it.
-It's really important to manage it. All around the time, I change how I
+It&rsquo;s really important to manage it. All around the time, I change how I
 manage it with new technique inside vim or develop by other developper.</p>
 
 <h2>Handmade management</h2>
@@ -54,26 +54,26 @@ hard.</p>
 <h2>Janus management</h2>
 
 <p>Yehuda Katz and Carl Lerche start a new project call <a href="https://github.com/carlhuda/janus">janus</a>.
-This project's goal is an easy plugin management by rake task. In this
+This project&rsquo;s goal is an easy plugin management by rake task. In this
 Rakefile, you can see the list of your plugin and with some rake task
 you can install it and update it. This project was really great. It
 start with a bunch of plugins pre-configure and good if you start using
 vim and you are not aware with what plugin can be good to you. But in
 time, the management can be a little tricky with version of janus. So
-it's a really good project to start vim.</p>
+it&rsquo;s a really good project to start vim.</p>
 
 <h2>Pathogen management, the first vim plugin to manage you plugins</h2>
 
-<p>To closed of janus's released, <a href="https://github.com/tpope">Tim Pope</a> ( a
+<p>To closed of janus&rsquo;s released, <a href="https://github.com/tpope">Tim Pope</a> ( a
 very important vim plugin developper ) release <a href="https://github.com/tpope/vim-pathogen">Pathogen</a>.
 This plugin help to manage your vim plugin directly in your <code>vimrc</code> file.
-I don't really use it. But a lot of people say it's a really good
+I don&rsquo;t really use it. But a lot of people say it&rsquo;s a really good
 plugin. There are a lot of fork of janus trying to use pathogen
 directly.</p>
 
 <h2>Vundle management</h2>
 
-<p>Now, someone told me about a very good plugin to manage his vim's
+<p>Now, someone told me about a very good plugin to manage his vim&rsquo;s
 plugin, <a href="https://github.com/gmarik/vundle">Vundle</a>. As Pathogen, the
 plugin management is do directly in your <code>vimrc</code>. His usage is really
 simple and well designed. If you are a ruby guy and use already <a href="http://gembundler.org">Bundler</a>,
@@ -84,7 +84,7 @@ directly inspired of this project.</p>
 
 <h2>Install Vundle</h2>
 
-<p>To install vundle, you just need clone the project's repository in your
+<p>To install vundle, you just need clone the project&rsquo;s repository in your
 <code>.vim</code> directory and add 2 lignes in your <code>vimrc</code> file</p>
 
 <p><code>
@@ -100,7 +100,7 @@ call vundle#rc()
 
 <h2>Configure your plugins</h2>
 
-<p>To use vundle after his installation, it's really simple. You just need
+<p>To use vundle after his installation, it&rsquo;s really simple. You just need
 add in your <code>vimrc</code> a <code>Bundle</code> command with path to your plugin. By
 example, if you want install the <code>vim-rails</code> plugin, you juste need add
 this line in your <code>vimrc</code> :</p>
@@ -112,7 +112,7 @@ Bundle 'tpope/vim-rails.git'
 <h2>Install your plugins</h2>
 
 <p>Now, when your vim is open, you can install or update your plugins by
-two vim's command.</p>
+two vim&rsquo;s command.</p>
 
 <ul>
 <li><code>BundleInstall</code> install your plugins</li>
@@ -127,7 +127,7 @@ try.</p>
 
 <p>If you want see my own <code>vimrc</code> your can see it on one of my <a href="https://github.com/shingara/vim-conf">github
 repository</a>. With the Vundle help,
-it's really simple to understand what plugin I really use. All is in
+it&rsquo;s really simple to understand what plugin I really use. All is in
 only one file.</p>
 
 <p><a href="http://blog.shingara.fr/vundle-ou-le-bundler-de-vim.html">Traduction Française</a></p>

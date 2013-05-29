@@ -4,7 +4,7 @@
   <title><![CDATA[Category: release | Shiny happy people coding]]></title>
   <link href="http://blog-en.shingara.fr//blog/categories/release/atom.xml" rel="self"/>
   <link href="http://blog-en.shingara.fr//"/>
-  <updated>2013-05-29T18:35:27+02:00</updated>
+  <updated>2013-05-29T22:06:56+02:00</updated>
   <id>http://blog-en.shingara.fr//</id>
   <author>
     <name><![CDATA[Cyril Mougel]]></name>
@@ -18,11 +18,10 @@
     <link href="http://blog-en.shingara.fr//errbit-0-dot-1-0.html"/>
     <updated>2013-05-29T18:04:00+02:00</updated>
     <id>http://blog-en.shingara.fr//errbit-0-dot-1-0</id>
-    <content type="html"><![CDATA[<p>Errbit was <a href="http://thinkrelevance.com/blog/2010/08/24/introducing-errbit">release for the first
-time</a> in August 24 2010 by Jared Pace.</p>
+    <content type="html"><![CDATA[<p>Errbit was <a href="http://thinkrelevance.com/blog/2010/08/24/introducing-errbit">release for the first time</a> in August 24 2010 by Jared Pace.</p>
 
-<p>Since this 3 years, errbit is not dead and it&rsquo;s really maintain and used.
-Now, I am proud to release this new
+<p>Errbit is not dead. It&rsquo;s actually maintained and used for the past 3
+years and now, I&rsquo;m proud to announce the release of
 errbit. There was not real release from the start, but I think it&rsquo;s
 needed. I do this first one with 0.1.0. Errbit do a lot of thing but can
 do better. I hope try to do this challenge with the Errbit Team and try

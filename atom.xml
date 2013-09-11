@@ -4,7 +4,7 @@
   <title><![CDATA[Shiny happy people coding]]></title>
   <link href="http://blog-en.shingara.fr//atom.xml" rel="self"/>
   <link href="http://blog-en.shingara.fr//"/>
-  <updated>2013-09-11T18:21:56+02:00</updated>
+  <updated>2013-09-11T18:27:14+02:00</updated>
   <id>http://blog-en.shingara.fr//</id>
   <author>
     <name><![CDATA[Cyril Mougel]]></name>
@@ -14,12 +14,12 @@
 
   
   <entry>
-    <title type="html"><![CDATA[errbit 0.2.0]]></title>
+    <title type="html"><![CDATA[errbit 0.2.0 released]]></title>
     <link href="http://blog-en.shingara.fr//errbit-0-dot-2-0.html"/>
     <updated>2013-09-11T18:51:00+02:00</updated>
     <id>http://blog-en.shingara.fr//errbit-0-dot-2-0</id>
     <content type="html"><![CDATA[<p>After 3 month of developpement a lot of fix bug and improvement with do
-by 16 contributors. I am proud to release this second version of Errbit
+by 16 contributors. I am proud to release this second version of <a href="http://errbit.github.io/errbit/">Errbit</a>
 where I am involved totally.</p>
 
 <p>This version 0.2.0 is the last supporting ruby 1.8.7. This ruby version become

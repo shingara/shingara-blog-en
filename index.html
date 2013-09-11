@@ -9,7 +9,9 @@
   <meta name="author" content="Cyril Mougel">
 
   
-  <meta name="description" content="Errbit was release for the first time in August 24 2010 by Jared Pace. Errbit is not dead. It&rsquo;s actually maintained and used for the past 3 &hellip;">
+  <meta name="description" content="After 3 month of developpement a lot of fix bug and improvement with do
+by 16 contributors. I am proud to release this second version of Errbit
+where &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -76,6 +78,103 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/errbit-0-dot-2-0.html">Errbit 0.2.0</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-11T18:51:00+02:00" pubdate data-updated="true">Sep 11<span>th</span>, 2013</time>
+        
+         | <a href="/errbit-0-dot-2-0.html#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>After 3 month of developpement a lot of fix bug and improvement with do
+by 16 contributors. I am proud to release this second version of Errbit
+where I am involved totally.</p>
+
+<p>This version 0.2.0 is the last supporting ruby 1.8.7. This ruby version become
+old and a lot of dependencies used by Errbit stop the maintain of this
+version too. So it&rsquo;s time to move forward and stop maintain this old
+version. The next version support only ruby 1.9.3 and higher.</p>
+
+<p>The complete changelog is :</p>
+
+<h2>Improvements</h2>
+
+<ul>
+<li>Update some gems (<a href="https://github.com/shingara">@shingara</a>)</li>
+<li><a href="https://github.com/errbit/errbit/issues/492">#492</a> Improve some Pjax call (<a href="https://github.com/nfedyashev">@nfedyashev</a>)</li>
+<li><a href="https://github.com/errbit/errbit/issues/428">#428</a> Add the support of Unfuddle Issue Tracker (<a href="https://github.com/parallel588">@parallel588</a>)</li>
+<li>Avoid to delete his own user (<a href="https://github.com/shingara">@shingara</a>)</li>
+<li><a href="https://github.com/errbit/errbit/issues/456">#456</a> Avoid to delete admin access of current user logged
+(<a href="https://github.com/shingara">@shingara</a>)</li>
+<li><a href="https://github.com/errbit/errbit/issues/253">#253</a> Refactor the Fingerprint generation (<a href="https://github.com/boblail">@boblail</a>)</li>
+<li><a href="https://github.com/errbit/errbit/issues/508">#508</a> Merge comments to when you merge problems (<a href="https://github.com/shingara">@shingara</a>)</li>
+<li>Update the Devise Gem to the last one (<a href="https://github.com/shingara">@shingara</a>)</li>
+<li><a href="https://github.com/errbit/errbit/issues/524">#524</a> Add current user information on the notifer.js (<a href="https://github.com/roryf">@roryf</a>)</li>
+<li>[#523][] Update javascript-stacktrace (<a href="http://github.com/aliscott">@aliscott</a>)</li>
+<li><a href="https://github.com/errbit/errbit/issues/516">#516</a> Add Jira Issue tracker (<a href="https://github.com/xenji">@xenji</a>)</li>
+<li>[#512][] Add capabilities to configure the use of sendmail to send
+email from Errbit (<a href="https://github.com/shingara">@shingara</a>)</li>
+<li><a href="https://github.com/errbit/errbit/issues/532">#532</a> Use https link in Gravatar if you use errbit on https
+(<a href="https://github.com/jeroenj">@jeroenj</a>)</li>
+<li>[#536][] Order app by name by default (<a href="https://github.com/2called-chaos">@2called-chaos</a>)</li>
+<li><a href="https://github.com/errbit/errbit/issues/542">#542</a> Allow the MONGODB_URL env configuration about Mongodb
+(<a href="https://github.com/bacongobbler">@bacongobbler</a>)</li>
+<li><a href="https://github.com/errbit/errbit/issues/530">#530</a> Improve the flowdock notification (<a href="https://github.com/nfedyashev">@nfedyashev</a>)</li>
+<li><a href="https://github.com/errbit/errbit/issues/531">#531</a> Improve the HipChat notification message (<a href="https://github.com/brendonrapp">@brendonrapp</a>)</li>
+</ul>
+
+
+<h3>Bug Fixes</h3>
+
+<ul>
+<li><a href="https://github.com/errbit/errbit/issues/343">#343</a> Fix the ical generation. (<a href="https://github.com/shingara">@shingara</a>)</li>
+<li><a href="https://github.com/errbit/errbit/issues/503">#503</a> Fix issue on where the service_url choose never use.
+(<a href="https://github.com/nfedyashev">@nfedyashev</a>)</li>
+<li><a href="https://github.com/errbit/errbit/issues/506">#506</a> Fix issue on bitbucket issue tracker creation failed.
+(<a href="https://github.com/Gonzih">@Gonzih</a>)</li>
+<li><a href="https://github.com/errbit/errbit/issues/514">#514</a> Add CDATA in xml return by Javascript. (<a href="https://github.com/mildavw">@mildavw</a>)</li>
+<li><a href="https://github.com/errbit/errbit/issues/517">#517</a> Javascript escape path from javascript Notifier. (<a href="https://github.com/roryf">@roryf</a>)</li>
+<li>[#518][] Fix issue when you try launch task
+errbit:db:update_update_problem_attrs. (<a href="https://github.com/shingara">@shingara</a>)</li>
+<li><a href="https://github.com/errbit/errbit/issues/526">#526</a> Fix issue of pagination after search. (<a href="https://github.com/shingara">@shingara</a>)</li>
+<li><a href="https://github.com/errbit/errbit/issues/528">#528</a> Fix issue of action after search. (<a href="https://github.com/shingara">@shingara</a>)</li>
+</ul>
+
+
+<h2>Next Step</h2>
+
+<p>The next step on this project is the usage of Mongoid 3.0. A complete
+list of issue planned to this next version is define on his
+<a href="https://github.com/errbit/errbit/issues?milestone=7&amp;page=1&amp;state=open">milestone</a></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -987,119 +1086,6 @@ Fri Mar 26 16:08:28 +0100 2010 : I am 10
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/oupsnow-0-5-0-released.html">Oupsnow 0.5.0 Released</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-03-13T00:00:00+01:00" pubdate data-updated="true">Mar 13<span>th</span>, 2010</time>
-        
-         | <a href="/oupsnow-0-5-0-released.html#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content">  <p>That&#8217;s it. After only one month to released <a href="http://oupsnow.rubyforge.org/">Oupsnow</a> 0.4.1, I released the 0.5.0 version. This version
-  mark adding features and stability on code base.</p>
-
-  <p>New features ?</p>
-
-  <ul>
-  <li> Add filter by closed or not with closed keywords</li>
-  <li>You can edit a milestone now</li>
-  <li>You can define one milestone like current. By define the first one created</li>
-  <li>Add the recover password configuration by your email</li>                                                                                                
-  <li>Add remember solution when you logged</li>
-  <li>Add information about number of ticket in search</li>
-  <li>A logged user can watch a ticket. If user watch ticket he received email
-  when ticket is update</li>
-  <li>A user can change his own email.</li>
-  </ul>
-
-  <p>Like I made each time, my capistrano file to deploy Oupsnow</p>
-  <typo:code lang="ruby">
-  set :application, &#8220;oupsnow&#8221;
-  set :repository,  &#8220;git://github.com/shingara/oupsnow.git&#8221;
-  set :domain, &#8220;dev.shingara.fr&#8221;
-
-  # If you aren&#8217;t deploying to /u/apps/#{application} on the target
-  # servers (which is the default), you can specify the actual location
-  # via the :deploy_to variable:
-  set :deploy_to, &#8220;XXXXXXXXX&#8221;
-
-  # If you aren&#8217;t using Subversion to manage your source code, specify
-  # your SCM below:
-  # set :scm, :subversion
-  set :scm, :git
-  set :git_enable_submodules, 1
-
-  set :runner, &#8220;xxxx&#8221;
-  set :user, &#8220;xxxx&#8221;
-  set :use_sudo, false
-
-  set :thin_conf, &#8220;/etc/thin/#{domain}.yml&#8221;
-
-  set :rails_env, &#8220;production&#8221;
-
-  role :app, domain
-  role :web, domain
-  role :db,  domain, :primary => true
-
-  task :update_config, :roles => [:app] do
-    run &#8220;ln -s #{shared_path}/config/database.yml #{release_path}/config/database.yml&#8221;
-    run &#8220;ln -s #{shared_path}/config/email.yml #{release_path}/config/email.yml&#8221;
-    run &#8220;ln -s #{shared_path}/config/initializers/errornot.rb #{release_path}/config/initializers/errornot.rb&#8221;
-    run &#8220;cd #{release_path} && echo &#8216;GOOGLE_ANALYTICS=&#34;XXXXXXXX&#34;&#8217; >> config/environment.rb&#8221;
-  end
-
-  namespace :deploy do
-    task :start, :roles => [:app] do
-      run &#8220;thin -C #{thin_conf} start&#8221;
-    end
-
-    task :stop, :roles => [:app] do
-      run &#8220;thin -C #{thin_conf} stop&#8221;
-    end
-
-    task :restart, :roles => [:app] do
-      run &#8220;thin -C #{thin_conf} restart&#8221;
-    end
-  end
-
-  task :update_db do
-    run &#8220;cd #{current_path} && RAILS_ENV=#{rails_env} rake db:update&#8221;
-  end
-
-  after &#8220;deploy:update_code&#8221;, :update_config
-  after &#8220;deploy:symlink&#8221;, :update_db
-  </typo:code>
-
-  <p><a href="http://blog.shingara.fr/oupsnow-0-5-0-est-sortie.html">Traduction française</a></p> 
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -1115,6 +1101,10 @@ Fri Mar 26 16:08:28 +0100 2010 : I am 10
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/errbit-0-dot-2-0.html">errbit 0.2.0</a>
+      </li>
+    
+      <li class="post">
         <a href="/errbit-0-dot-1-0.html">Errbit 0.1.0</a>
       </li>
     
@@ -1128,10 +1118,6 @@ Fri Mar 26 16:08:28 +0100 2010 : I am 10
     
       <li class="post">
         <a href="/dante-lets-you-put-some-daemon-in-your-code.html">Dante lets you put some daemon in your code</a>
-      </li>
-    
-      <li class="post">
-        <a href="/moped-the-new-mongodb-ruby-driver.html">Moped the new mongoDB ruby driver</a>
       </li>
     
   </ul>

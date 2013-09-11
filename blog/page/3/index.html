@@ -9,7 +9,7 @@
   <meta name="author" content="Cyril Mougel">
 
   
-  <meta name="description" content="With Merb-mailer, merb offer a system to send email. But merb is a web framework ORM agnostic. So merb-mailer is like a controller, not a model like &hellip;">
+  <meta name="description" content="How i use merb in my personal time and in my new open source project, I study more deeply the depedency system of Merb. Merb is a gem based &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -76,6 +76,149 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/manage-your-dependencies-with-merb.html">Manage Your Dependencies With Merb</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-01-20T00:00:00+01:00" pubdate data-updated="true">Jan 20<span>th</span>, 2009</time>
+        
+         | <a href="/manage-your-dependencies-with-merb.html#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"> <p>How i use merb in my personal time and in my new open source project, I study more deeply the depedency system of Merb.</p>
+
+  <p>Merb is a gem based framework. In this way, all dependency need to be a gem and only gem.</p>
+
+  <h1>Using gem with Merb</h1>
+
+  <p>To use gem with Merb, it&#8217;s simply. You can use your local repository of gem or freeze another.</p>
+
+  <h2>Using your local gem repository</h2>
+
+  <p>If you use this technique, so no more simply. update the file <code>/config/dependencies.rb</code> to inform what gem you want load in your application. By exemple, the <code>dependencies.rb</code> file after a fresh merb installation.</p>
+
+  <typo:code lang='ruby'>
+  # dependencies are generated using a strict version, don&#8217;t forget to edit the dependency versions when upgrading.
+  merb_gems_version = &#8220;1.0.7.1&#8221;
+  dm_gems_version   = &#8220;0.9.8&#8221;
+
+  # For more information about each component, please read http://wiki.merbivore.com/faqs/merb_components
+  dependency &#8220;merb-action-args&#8221;, merb_gems_version
+  dependency &#8220;merb-assets&#8221;, merb_gems_version  
+  dependency &#8220;merb-cache&#8221;, merb_gems_version   
+  dependency &#8220;merb-helpers&#8221;, merb_gems_version 
+  dependency &#8220;merb-mailer&#8221;, merb_gems_version  
+  dependency &#8220;merb-slices&#8221;, merb_gems_version  
+  dependency &#8220;merb-auth-core&#8221;, merb_gems_version
+  dependency &#8220;merb-auth-more&#8221;, merb_gems_version
+  dependency &#8220;merb-auth-slice-password&#8221;, merb_gems_version
+  dependency &#8220;merb-param-protection&#8221;, merb_gems_version
+  dependency &#8220;merb-exceptions&#8221;, merb_gems_version
+   
+  dependency &#8220;dm-core&#8221;, dm_gems_version    
+  dependency &#8220;dm-aggregates&#8221;, dm_gems_version   
+  dependency &#8220;dm-migrations&#8221;, dm_gems_version   
+  dependency &#8220;dm-timestamps&#8221;, dm_gems_version   
+  dependency &#8220;dm-types&#8221;, dm_gems_version    
+  dependency &#8220;dm-validations&#8221;, dm_gems_version  
+
+  dependency &#8220;merb_datamapper&#8221;, merb_gems_version
+  dependency &#8220;do_sqlite3&#8221; # If using another database, replace this
+  </typo:code>
+
+  <p>We can list all gems of Merb and Datamapper to want use it. If we want use new one. you can just update this list. You can delete it too, if you want less loading gem, because you don&#8217;t use it.</p>
+
+  <h2>Using a local gem repository in your application</h2>
+<p>It&#8217;s a different point in comparaison to RubyOnRails. In my point of view, it&#8217;s better than Rails system. The idea is simple. Rubygems can be define a directory where all gem are. So why don&#8217;t put this directory in your application?</p>                             
+
+  <p>To using this technique, you need create the directory <code>/gems</code> in your application. After use the thor task to install your wanted gem in your new gem repository. You can install merb-core and datamapper with follow command:</p>
+
+  <typo:code lang="plain">
+  $ thor merb:gem:install merb-core dm-core
+  </typo:code>
+
+  <p>Once all dependencies are install, you can freeze your application with all using gem.</p>
+
+  <p>If you want use a source manager, you just need add the directory <code>/gems/cache</code>. This directory contains all <code>gem</code> files using. The other directory can be generate after. So when you get some sources, you just need made the thor task of deployement:</p>
+
+  <typo:code lang="plain">
+  $ thor merb:gem:redeploy
+  </typo:code>
+
+  <p>All gems in your cache directory to install in your gems directory. I found this system better than rails because, if you have some gem with C extension, you can freeze it in your merb application. All extension can be compiled in other system. You can&#8217;t to do that with Rails.</p>
+
+  <h1>But if I want use developpement version. How can I do ?</h1>
+
+  <p>It&#8217;s the weakly point of Merb in comparison with Rails. With Rails, it&#8217;s easy. We put some sources in directory <code>/vendor</code> and all works. A simple <code>git submodule</code> allow to track the dependencies evolution. Merb can&#8217;t allow that. Merb load only gem.</p>
+
+  <h2>Core-team recommandation</h2>
+
+  <p>This technique recommand by core-team is based on gem. You need generate gem on your developpement source. Add it on your directory <code>gems/cache</code> and after using it. there are some thor task to help you to do that. By exemple, you can install the developpment version with command : </p>
+
+  <typo:code lang="plain">
+  $ thor merb:source:install dm-core
+  </typo:code>
+
+  <p>This task clone the dm-core repository in your directory <code>/src/</code>, generate the gem and install it in your directory <code>/gem</code>. You can made same thing with push source directly inside <code>/src/</code> directory and use this name directory. it&#8217;s launch the <code>rake package</code> and install the generated gem.</p>
+
+  <p>I thing that it&#8217;s not really good, because you can&#8217;t know what it&#8217;s really this gem use it. The version number gem is fixe and we can&#8217;t know how commit use it. I like know just after a clone of project what commit it&#8217;s use on each gem.</p>
+
+  <h2>My personnal technique avoid generated gem</h2>
+
+  <p>This technique working, but it&#8217;s not the  better. In my file <code>config/init.rb</code>, I created a little method:</p>
+
+  <typo:code lang='ruby'>
+  def load_from_source(src)
+    $:.unshift File.join(Merb.root, &#8220;src/#{src}/lib&#8221;)
+    require &#8220;src/#{src}/init.rb&#8221;
+  end
+  </typo:code>
+
+  <p>After in the before_app_loads callback, I can call this method.</p>
+<typo:code lang="ruby">
+  Merb::BootLoader.before_app_loads do
+    # This will get executed after dependencies have been loaded but before your app&#8217;s classes have loaded.
+    load_from_source(&#8216;will_paginate&#8217;)
+  end
+  </typo:code>
+  <p>Now with a will_paginate clone repository in my directory <code>/src/</code> will_paginate can be loaded before the application load and after all dependencies load.</p>
+
+  <p>BUt this technique has a big issue. I can&#8217;t fixed it without some patch to Merb (I made it maybe, even Merb is a little dead in futur :&#8217;( ). So we can load from source only after all dependencies. If you want load some source in middle of dependency, you can&#8217;t . Yo
+u need using gem system.</p>
+  <h2>What not to do</h2>
+
+  <p>I made it, so i say to you don&#8217;t to do. You can&#8217;t using require in your dependencies file. If you require in this file. your sources are loaded before all dependency. All dependency list on this file are loaded after. So you can to have problem with loading order.<
+/p>
+
+  <p><a href="http://blog.shingara.fr/gestion-des-dependances-avec-merb.html">Traduction Francaise</a></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -481,6 +624,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/errbit-0-dot-2-0.html">errbit 0.2.0</a>
+      </li>
+    
+      <li class="post">
         <a href="/errbit-0-dot-1-0.html">Errbit 0.1.0</a>
       </li>
     
@@ -494,10 +641,6 @@
     
       <li class="post">
         <a href="/dante-lets-you-put-some-daemon-in-your-code.html">Dante lets you put some daemon in your code</a>
-      </li>
-    
-      <li class="post">
-        <a href="/moped-the-new-mongodb-ruby-driver.html">Moped the new mongoDB ruby driver</a>
       </li>
     
   </ul>

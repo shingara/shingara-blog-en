@@ -4,7 +4,7 @@
   <title><![CDATA[Category: release | Shiny happy people coding]]></title>
   <link href="http://blog-en.shingara.fr//blog/categories/release/atom.xml" rel="self"/>
   <link href="http://blog-en.shingara.fr//"/>
-  <updated>2013-05-29T22:06:56+02:00</updated>
+  <updated>2013-09-11T18:14:37+02:00</updated>
   <id>http://blog-en.shingara.fr//</id>
   <author>
     <name><![CDATA[Cyril Mougel]]></name>
@@ -12,6 +12,74 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[errbit 0.2.0]]></title>
+    <link href="http://blog-en.shingara.fr//errbit-0-dot-2-0.html"/>
+    <updated>2013-09-11T18:51:00+02:00</updated>
+    <id>http://blog-en.shingara.fr//errbit-0-dot-2-0</id>
+    <content type="html"><![CDATA[<p>After 3 month of developpement a lot of fix bug and improvement with do
+by 16 contributors. I am proud to release this second version of Errbit
+where I am involved totally.</p>
+
+<p>This version 0.2.0 is the last supporting ruby 1.8.7. This ruby version become
+old and a lot of dependencies used by Errbit stop the maintain of this
+version too. So it&rsquo;s time to move forward and stop maintain this old
+version. The next version support only ruby 1.9.3 and higher.</p>
+
+<p>The complete changelog is :</p>
+
+<h2>Improvements</h2>
+
+<ul>
+<li>Update some gems (<a href="https://github.com/shingara">@shingara</a>)</li>
+<li><a href="https://github.com/errbit/errbit/issues/492">#492</a> Improve some Pjax call (<a href="https://github.com/nfedyashev">@nfedyashev</a>)</li>
+<li><a href="https://github.com/errbit/errbit/issues/428">#428</a> Add the support of Unfuddle Issue Tracker (<a href="https://github.com/parallel588">@parallel588</a>)</li>
+<li>Avoid to delete his own user (<a href="https://github.com/shingara">@shingara</a>)</li>
+<li><a href="https://github.com/errbit/errbit/issues/456">#456</a> Avoid to delete admin access of current user logged
+(<a href="https://github.com/shingara">@shingara</a>)</li>
+<li><a href="https://github.com/errbit/errbit/issues/253">#253</a> Refactor the Fingerprint generation (<a href="https://github.com/boblail">@boblail</a>)</li>
+<li><a href="https://github.com/errbit/errbit/issues/508">#508</a> Merge comments to when you merge problems (<a href="https://github.com/shingara">@shingara</a>)</li>
+<li>Update the Devise Gem to the last one (<a href="https://github.com/shingara">@shingara</a>)</li>
+<li><a href="https://github.com/errbit/errbit/issues/524">#524</a> Add current user information on the notifer.js (<a href="https://github.com/roryf">@roryf</a>)</li>
+<li>[#523][] Update javascript-stacktrace (<a href="http://github.com/aliscott">@aliscott</a>)</li>
+<li><a href="https://github.com/errbit/errbit/issues/516">#516</a> Add Jira Issue tracker (<a href="https://github.com/xenji">@xenji</a>)</li>
+<li>[#512][] Add capabilities to configure the use of sendmail to send
+email from Errbit (<a href="https://github.com/shingara">@shingara</a>)</li>
+<li><a href="https://github.com/errbit/errbit/issues/532">#532</a> Use https link in Gravatar if you use errbit on https
+(<a href="https://github.com/jeroenj">@jeroenj</a>)</li>
+<li>[#536][] Order app by name by default (<a href="https://github.com/2called-chaos">@2called-chaos</a>)</li>
+<li><a href="https://github.com/errbit/errbit/issues/542">#542</a> Allow the MONGODB_URL env configuration about Mongodb
+(<a href="https://github.com/bacongobbler">@bacongobbler</a>)</li>
+<li><a href="https://github.com/errbit/errbit/issues/530">#530</a> Improve the flowdock notification (<a href="https://github.com/nfedyashev">@nfedyashev</a>)</li>
+<li><a href="https://github.com/errbit/errbit/issues/531">#531</a> Improve the HipChat notification message (<a href="https://github.com/brendonrapp">@brendonrapp</a>)</li>
+</ul>
+
+
+<h3>Bug Fixes</h3>
+
+<ul>
+<li><a href="https://github.com/errbit/errbit/issues/343">#343</a> Fix the ical generation. (<a href="https://github.com/shingara">@shingara</a>)</li>
+<li><a href="https://github.com/errbit/errbit/issues/503">#503</a> Fix issue on where the service_url choose never use.
+(<a href="https://github.com/nfedyashev">@nfedyashev</a>)</li>
+<li><a href="https://github.com/errbit/errbit/issues/506">#506</a> Fix issue on bitbucket issue tracker creation failed.
+(<a href="https://github.com/Gonzih">@Gonzih</a>)</li>
+<li><a href="https://github.com/errbit/errbit/issues/514">#514</a> Add CDATA in xml return by Javascript. (<a href="https://github.com/mildavw">@mildavw</a>)</li>
+<li><a href="https://github.com/errbit/errbit/issues/517">#517</a> Javascript escape path from javascript Notifier. (<a href="https://github.com/roryf">@roryf</a>)</li>
+<li>[#518][] Fix issue when you try launch task
+errbit:db:update_update_problem_attrs. (<a href="https://github.com/shingara">@shingara</a>)</li>
+<li><a href="https://github.com/errbit/errbit/issues/526">#526</a> Fix issue of pagination after search. (<a href="https://github.com/shingara">@shingara</a>)</li>
+<li><a href="https://github.com/errbit/errbit/issues/528">#528</a> Fix issue of action after search. (<a href="https://github.com/shingara">@shingara</a>)</li>
+</ul>
+
+
+<h2>Next Step</h2>
+
+<p>The next step on this project is the usage of Mongoid 3.0. A complete
+list of issue planned to this next version is define on his
+<a href="https://github.com/errbit/errbit/issues?milestone=7&amp;page=1&amp;state=open">milestone</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Errbit 0.1.0]]></title>
